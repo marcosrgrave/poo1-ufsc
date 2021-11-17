@@ -8,7 +8,7 @@ def average2():
     C = float(input())
 
     avg = (A * 2.0 + B * 3.0 + C * 5.0) / (2.0 + 3.0 + 5.0)
-    print(f'MEDIA = {avg}')
+    print(f'MEDIA = {avg:.1f}')
 
 
 def difference():
@@ -40,13 +40,10 @@ def sallary_with_bonus():
 
 
 def area():
-    A = 3.0
-    B = 4.0
-    C = 5.2
-
-    # A = float(input())
-    # B = float(input())
-    # C = float(input())
+    entry = input().strip().split()
+    A = float(entry[0])
+    B = float(entry[1])
+    C = float(entry[2])
 
     pi = 3.14159
 
@@ -68,15 +65,12 @@ def consumption():
 
 
 def distance_between_two_points():
-    x1 = 1.0
-    y1 = 7.0
-    x2 = 5.0
-    y2 = 9.0
-
-    # x1 = float(input())
-    # y1 = float(input())
-    # x2 = float(input())
-    # y2 = float(input())
+    entry1 = input().strip().split()
+    entry2 = input().strip().split()
+    x1 = float(entry1[0])
+    y1 = float(entry1[1])
+    x2 = float(entry2[0])
+    y2 = float(entry2[1])
 
     dist = ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** (1 / 2)
     print(f'{dist:.4f}')
@@ -122,11 +116,9 @@ def age_in_days():
 
 
 def regular_simple_polygons():
-    number_sides = 3  # 3 ≤ N ≤ 1000000
-    length_sides = 1  # 1 ≤ N ≤ 4000
-
-    # number_sides = int(input())
-    # length_sides = int(input())
+    entry = input().strip().split()
+    number_sides = int(entry[0])
+    length_sides = int(entry[1])
 
     if number_sides > 0 and length_sides > 0 and 3 <= number_sides and number_sides <= 1000000 and 1 <= length_sides and length_sides <= 4000:
         perimeter = number_sides * length_sides
@@ -141,24 +133,15 @@ def pneu():
 
 
 def transporte_containers():
-    larg_container = 1
-    compr_container = 2
-    alt_container = 5
+    entry1 = input().strip().split()
+    larg_container = int(entry1[0])
+    compr_container = int(entry1[1])
+    alt_container = int(entry1[2])
 
-    larg_navio = 9
-    compr_navio = 6
-    alt_limite_navio = 11
-
-    ######################################
-    #  1 ≤ A, B, C, X, Y, Z ≤ 106
-
-    # larg_container = int(input())
-    # compr_container = int(input())
-    # alt_container = int(input())
-    #
-    # larg_navio = int(input())
-    # compr_navio = int(input())
-    # alt_limite_navio = int(input())
+    entry2 = input().strip().split()
+    larg_navio = int(entry2[0])
+    compr_navio = int(entry2[1])
+    alt_limite_navio = int(entry2[2])
 
     qtd_larg = larg_navio // larg_container
     qtd_compr = compr_navio // compr_container
