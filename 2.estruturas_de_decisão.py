@@ -1,9 +1,30 @@
 def selection_test_1():
-    pass
+    entry = input().strip().split()
+    A = int(entry[0])
+    B = int(entry[1])
+    C = int(entry[2])
+    D = int(entry[3])
+
+    test1 = B > C and D > A
+    test2 = C + D > A + B
+    test3 = C > 0 and D > 0 and A % 2 == 0
+    print('Valores aceitos') if test1 and test2 and test3 else print('Valores nao aceitos')
 
 
 def interval():
-    pass
+    n = float(input())
+    vs = [25, 50, 75, 100]
+
+    if n < 0 or n > 100:
+        print('Fora de intervalo')
+    else:
+        if n >= 0 and n <= 25:
+            print('Intervalo [0,25]')
+        else:
+            for i, v in enumerate(vs):
+                if i+1 < len(vs):
+                    if n > vs[i] and n <= vs[i+1]:
+                        print(f'Intervalo ({vs[i]},{vs[i+1]}]')
 
 
 def snack():
@@ -17,23 +38,11 @@ def snack():
 
 def average3():
     notas = input().split()
-    nota1 = float(notas[0])
-    nota2 = float(notas[1])
-    nota3 = float(notas[2])
-    nota4 = float(notas[3])
-
-    # nota1 = float(input())
-    # nota2 = float(input())
-    # nota3 = float(input())
-    # nota4 = float(input())
-
-    # notas = [nota1, nota2, nota3, nota4]
-    # notas = [2.0, 4.0, 7.5, 8.0]
     pesos = [2, 3, 4, 1]
 
     soma = 0
     for i, nota in enumerate(notas):
-        soma += nota * pesos[i]
+        soma += float(nota) * pesos[i]
     media = soma / sum(pesos)
 
     exame = False
@@ -45,17 +54,14 @@ def average3():
     else:
         status = 'Aluno reprovado.'
 
-    # print(f'Media: {media:.1f}\n{status}')
-    print('Media: ' + "%.1f" % media + '\n' + status)
-
     if exame:
-        # nota_exame = float(input())
-        nota_exame = 6.4
+        nota_exame = float(input())
         media = (media + nota_exame) / 2
         status = 'Aluno aprovado.' if media >= 5 else 'Aluno reprovado.'
 
-        # print(f'Nota do exame: {nota_exame:.1f}\n{status}\nMedia final: {media:.1f}')
-        print('Nota do exame: ' + "%.1f" % nota_exame + '\n' + status + '\n' + 'Media final: ' + "%.1f" % media)
+    print(f'Media: {media:.1f}\n{status}')
+    if exame:
+        print(f'Nota do exame: {nota_exame:.1f}\n{status}\nMedia final: {media:.1f}')
 
 
 def triangle():
@@ -83,11 +89,53 @@ def multiples():
 
 
 def animal():
-    pass
+    dado1 = input()
+    dado2 = input()
+    dado3 = input()
+
+    if dado1 == 'vertebrado':
+        if dado2 == 'ave':
+            print('aguia') if dado3 == 'carnivoro' else print('pomba')
+        else:
+            print('homem') if dado3 == 'onivoro' else print('vaca')
+    else:
+        if dado2 == 'inseto':
+            print('pulga') if dado3 == 'hematofago' else print('lagarta')
+        else:
+            print('sanguessuga') if dado3 == 'hematofago' else print('minhoca')
 
 
 def wich_triangle():
-    pass
+    entry = input().split()
+    A = int(entry[0])
+    B = int(entry[1])
+    C = int(entry[2])
+
+    testeA = abs(B - C) < A < (B + C)
+    testeB = abs(A - C) < B < (A + C)
+    testeC = abs(A - B) < C < (A + B)
+
+    valido = True if testeA and testeB and testeC else False
+    isoceles = True if A == B or A == C or B == C else False
+    equilatero = True if A == B == C else False
+
+    entry_int = []
+    for v in entry:
+        entry_int.append(int(v))
+    retangulo = True if max(A, B, C) ** 2 == sorted(entry_int)[0] ** 2 + sorted(entry_int)[1] ** 2 else False
+
+    if valido:
+        if isoceles:
+            print('Valido-Isoceles')
+            print('Retangulo: S') if retangulo else print('Retangulo: N')
+        elif equilatero:
+            print('Valido-Equilatero')
+            print('Retangulo: S') if retangulo else print('Retangulo: N')
+        else:
+            print('Valido-Escaleno')
+            print('Retangulo: S') if retangulo else print('Retangulo: N')
+    else:
+        print('Invalido')
 
 
 def avioes_de_papel():
@@ -96,7 +144,7 @@ def avioes_de_papel():
     qtd_folhas_compradas = int(entry[1])
     qtd_folhas_necessarias = int(entry[2])
 
-    print('S') if qtd_compet*qtd_folhas_necessarias <= qtd_folhas_compradas else print('N')
+    print('S') if qtd_compet * qtd_folhas_necessarias <= qtd_folhas_compradas else print('N')
 
 
 def sedex():
@@ -117,7 +165,9 @@ def sedex_marciano():
     z = int(entry[2])
     raio = int(entry[3])
 
-    print('S') if raio**2 >= x**2/4 + y**2/4 and raio**2 >= x**2/4 + z**2/4 and raio**2 >= y**2/4 + z**2/4 else print('N')
+    print(
+        'S') if raio ** 2 >= x ** 2 / 4 + y ** 2 / 4 and raio ** 2 >= x ** 2 / 4 + z ** 2 / 4 and raio ** 2 >= y ** 2 / 4 + z ** 2 / 4 else print(
+        'N')
 
 
 def vice_campeao():
@@ -129,14 +179,20 @@ def vice_campeao():
 
 
 def colchao():
-    pass
+    dimensoes_colchao = sorted(map(int, input().split()))
+    dimensoes_porta = sorted(map(int, input().split()))
+
+    if dimensoes_colchao[0] <= dimensoes_porta[0] and dimensoes_colchao[1] <= dimensoes_porta[1]:
+        print('S')
+    else:
+        print('N')
 
 
 def campeonato():
     entry = input().strip().split()
     Cv, Ce, Cs, Fv, Fe, Fs = int(entry[0]), int(entry[1]), int(entry[2]), int(entry[3]), int(entry[4]), int(entry[5])
-    pts_C = Cv*3 + Ce
-    pts_F = Fv*3 + Fe
+    pts_C = Cv * 3 + Ce
+    pts_F = Fv * 3 + Fe
     if pts_C > pts_F:
         print('C')
     elif pts_C == pts_F:
@@ -151,8 +207,24 @@ def campeonato():
 
 
 def corrida():
-    pass
+    charrete1 = input().strip().split()
+    n1 = int(charrete1[0])  # numero da charrete
+    d1 = int(charrete1[1])  # distancia em metros
+    v1 = int(charrete1[2])  # velocidade em km/h
+
+    v1_ms = v1 / 3.6
+    t1 = d1 / v1_ms
+
+    charrete2 = input().strip().split()
+    n2 = int(charrete2[0])
+    d2 = int(charrete2[1])
+    v2 = int(charrete2[2])
+
+    v2_ms = v2 / 3.6
+    t2 = d2 / v2_ms
+
+    print(n1) if t1 < t2 else print(n2)
 
 
-campeonato()
+interval()
 # -*- coding: utf-8 -*-
