@@ -48,7 +48,7 @@ def average3():
     exame = False
     if media >= 7:
         status = 'Aluno aprovado.'
-    elif media < 7 and media > 5:
+    elif 7 > media > 5:
         status = 'Aluno em exame.'
         exame = True
     else:

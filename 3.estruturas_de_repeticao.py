@@ -64,7 +64,7 @@ def queen():
     # board = [8, 8]
 
 
-def sum_of_consecutive_odd_numbersII():  # NAO CONSEGUI ENCONTRAR O ERRO
+def sum_of_consecutive_odd_numbersII():
     respostas = []
 
     test_cases = int(input())
