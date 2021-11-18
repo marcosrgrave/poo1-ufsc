@@ -51,13 +51,11 @@ def average3():
     elif 7 > media > 5:
         status = 'Aluno em exame.'
         exame = True
-    else:
-        status = 'Aluno reprovado.'
-
-    if exame:
         nota_exame = float(input())
         media_exame = (media + nota_exame) / 2
         status_exame = 'Aluno aprovado.' if media >= 5 else 'Aluno reprovado.'
+    else:
+        status = 'Aluno reprovado.'
 
     print(f'Media: {media:.1f}\n{status}')
     if exame:
