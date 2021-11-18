@@ -64,17 +64,22 @@ def queen():
     # board = [8, 8]
 
 
-def sum_of_consecutive_odd_numbersII():
+def sum_of_consecutive_odd_numbersII():  # NAO CONSEGUI ENCONTRAR O ERRO
+    respostas = []
+
     test_cases = int(input())
     for test_case in range(0, test_cases):
         entry = input().split()
         X = int(entry[0])
         Y = int(entry[1])
         soma = 0
-        for number in range(min(X, Y), max(X, Y)):
+        for number in range(min(X, Y)+1, max(X, Y)):
             if (number + 1) % 2 == 0:
                 soma += number
-        print(soma)
+        respostas.append(soma)
+
+    for resposta in respostas:
+        print(resposta)
 
 
 def fixed_password():
@@ -107,83 +112,108 @@ def fast_prime_number():
 
 
 def feynman():
-    N = 1
-    while N != 0:
+    respostas = []
+
+    while True:
         N = int(input())
+        if N == 0:
+            break
         sum = 0
         for v in range(N, 0, -1):
             sum += v**2
-        print(sum)
+        respostas.append(sum)
+
+    for resposta in respostas:
+        print(resposta)
 
 
-def zero_or_one():  # O PROBLEMA TÁ NO EOF, ELE LÊ UMA PORRADA DE DADOS PRA SÓ DEPOIS MOSTRAR OS RESULTADOS
-    # test_sets = []
-    # while True:
-    #     entry = input().split()
-    #     test_sets.append(entry)
+def zero_or_one():  # O PROBLEMA TAVA NO EOF, ELE LÊ UMA PORRADA DE DADOS PRA SÓ DEPOIS MOSTRAR OS RESULTADOS
+    respostas = []
+    while True:
+        try:
+            rodada = input().split()
+            rodada_int = []
+            for v in rodada:
+                rodada_int.append(int(v))
+            players = ['A', 'B', 'C']
 
-    rodada = input().split()
-    rodada_int = []
-    for v in rodada:
-        rodada_int.append(int(v))
-    players = ['A', 'B', 'C']
+            sum0 = sum1 = 0
+            for v in rodada_int:
+                if v == 0:
+                    sum0 += 1
+                else:
+                    sum1 += 1
 
-    sum0 = sum1 = 0
-    for v in rodada_int:
-        if v == 0:
-            sum0 += 1
-        else:
-            sum1 += 1
+            draw = False
+            i = 0
+            if sum0 == 1:
+                i = rodada_int.index(0)
+            elif sum1 == 1:
+                i = rodada_int.index(1)
+            else:
+                draw = True
+            respostas.append('*') if draw else respostas.append(players[i])
 
-    draw = False
-    i = 0
-    if sum0 == 1:
-        i = rodada_int.index(0)
-    elif sum1 == 1:
-        i = rodada_int.index(1)
-    else:
-        draw = True
-    print('*') if draw else print(players[i])
+        except EOFError:
+            for r in respostas:
+                print(r)
+            break
 
 
 def pedro_christmas():
     from datetime import date
+    respostas = []
 
-    entry = '12 26'.split()  # input().split()
-    month_data = int(entry[0])
-    day_data = int(entry[1])
+    while True:
+        try:
+            entry = input().split()
+            month_data = int(entry[0])
+            day_data = int(entry[1])
 
-    date_input = date(2016, month_data, day_data)
-    date_christmas = date(2016, 12, 25)
-    dif = date_input - date_christmas
-    if dif.days > 0:
-        print('Ja passou!')
-    elif dif.days == 0:
-        print('E natal!')
-    elif dif.days == -1:
-        print('E vespera de natal!')
-    else:
-        print(f'Faltam {abs(dif.days)} dias para o natal!')
-
-    # print(dif.days)
+            date_input = date(2016, month_data, day_data)
+            date_christmas = date(2016, 12, 25)
+            dif = date_input - date_christmas
+            if dif.days > 0:
+                respostas.append('Ja passou!')
+            elif dif.days == 0:
+                respostas.append('E natal!')
+            elif dif.days == -1:
+                respostas.append('E vespera de natal!')
+            else:
+                respostas.append(f'Faltam {abs(dif.days)} dias para o natal!')
+            # print(dif.days)
+        except EOFError:
+            for r in respostas:
+                print(r)
+            break
 
 
 def bits_exchanged():
+    resps = []
+    resps2 = []
+    resps3 = []
+
     bills = [50, 10, 5, 1]
-    V = c = 1
+    c = 1
     while True:
         V = abs(int(input()))
         if V == 0:
             break
         else:
-            print(f'Teste {c}')
+            resps.append(f'Teste {c}')
             for bill in bills:
                 div = V // bill
                 V = V - div * bill
-                print(div, end=' ')
-            V = 1
+                resps2.append(div)
             c += 1
-            print('\n')
+            resps3.append('\n')
+
+    i = 0
+    for r1 in resps:
+        print(r1)
+        for r2 in range(i, i+4):
+            print(resps2[r2])
+            i += 4
 
 
 def folding():
@@ -193,10 +223,14 @@ def folding():
 
 
 def grandma():
+    resps = []
+
     c = 1
-    while c != 0:
+    while True:
         N = int(input())
-        print(f'Teste {c}')
+        if N == 0:
+            break
+        resps.append(f'Teste {c}')
         sum_potA = sum_potB = 0
         for i in range(0, N):
             entry = input().split()
@@ -206,9 +240,12 @@ def grandma():
             sum_potA += potA
             sum_potB += potB
             dif = sum_potA - sum_potB
-            print(dif)
+            resps.append(dif)
         c += 1
-        print('\n')
+        resps.append('')
+
+    for r in resps:
+        print(r)
 
 
 def garcom():
@@ -227,34 +264,5 @@ def tustin():
     pass
 
 
-def zero_or_one2():  # O PROBLEMA TÁ NO EOF, ELE LÊ UMA PORRADA DE DADOS PRA SÓ DEPOIS MOSTRAR OS RESULTADOS
-    test_sets = []
-    while not EOFError:
-        entry = input().split()
-        test_sets.append(entry)
-    for test_set in test_sets:
-        test_set_int = []
-        for v in test_set:
-            test_set_int.append(int(v))
-        players = ['A', 'B', 'C']
-
-        sum0 = sum1 = 0
-        for v in test_set_int:
-            if v == 0:
-                sum0 += 1
-            else:
-                sum1 += 1
-
-        draw = False
-        i = 0
-        if sum0 == 1:
-            i = test_set_int.index(0)
-        elif sum1 == 1:
-            i = test_set_int.index(1)
-        else:
-            draw = True
-        print('*') if draw else print(players[i])
-
-
-feynman()
+grandma()
 # -*- coding: utf-8 -*-
