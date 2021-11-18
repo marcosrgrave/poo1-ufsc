@@ -56,12 +56,12 @@ def average3():
 
     if exame:
         nota_exame = float(input())
-        media = (media + nota_exame) / 2
-        status = 'Aluno aprovado.' if media >= 5 else 'Aluno reprovado.'
+        media_exame = (media + nota_exame) / 2
+        status_exame = 'Aluno aprovado.' if media >= 5 else 'Aluno reprovado.'
 
     print(f'Media: {media:.1f}\n{status}')
     if exame:
-        print(f'Nota do exame: {nota_exame:.1f}\n{status}\nMedia final: {media:.1f}')
+        print(f'Nota do exame: {nota_exame:.1f}\n{status_exame}\nMedia final: {media_exame:.1f}')
 
 
 def triangle():
@@ -226,5 +226,5 @@ def corrida():
     print(n1) if t1 < t2 else print(n2)
 
 
-interval()
+average3()
 # -*- coding: utf-8 -*-
