@@ -190,8 +190,6 @@ def pedro_christmas():
 
 def bits_exchanged():
     resps = []
-    resps2 = []
-    resps3 = []
 
     bills = [50, 10, 5, 1]
     c = 1
@@ -200,20 +198,16 @@ def bits_exchanged():
         if V == 0:
             break
         else:
-            resps.append(f'Teste {c}')
+            vetor_temp = []
             for bill in bills:
                 div = V // bill
                 V = V - div * bill
-                resps2.append(div)
+                vetor_temp.append(div)
+            resps.append(f'Teste {c}\n{vetor_temp[0]} {vetor_temp[1]} {vetor_temp[2]} {vetor_temp[3]}\n')
             c += 1
-            resps3.append('\n')
 
-    i = 0
-    for r1 in resps:
-        print(r1)
-        for r2 in range(i, i+4):
-            print(resps2[r2])
-            i += 4
+    for r in resps:
+        print(r)
 
 
 def folding():
@@ -264,5 +258,5 @@ def tustin():
     pass
 
 
-grandma()
+bits_exchanged()
 # -*- coding: utf-8 -*-
