@@ -1,5 +1,3 @@
-from time import process_time, time
-
 
 def quadrant():
     respostas = []
@@ -114,7 +112,16 @@ def chocolate():
 
 
 def saldo_do_vovo():
-    pass
+    entry = input().strip().split()
+    total_periodos = int(entry[0])
+    saldo_conta = int(entry[1])
+
+    saldos_periodo = list()
+    for periodo in range(0, total_periodos):
+        movimentacao_periodo = int(input())
+        saldo_conta += movimentacao_periodo
+        saldos_periodo.append(saldo_conta)
+    print(min(saldos_periodo))
 
 
 def old_clock():
@@ -122,7 +129,35 @@ def old_clock():
 
 
 def kikoho():
-    pass
+    resps = list()
+    
+    test_cases = int(input())
+    for test_case in range(0, test_cases):
+        segmX = list()
+        segmY = list()
+        area_triangulos = list()
+        
+        entry = input().strip().split()
+        X1, Y1, X2, Y2, X3, Y3 = int(entry[0]), int(entry[1]), int(entry[2]), int(entry[3]), int(entry[4]), int(entry[5])
+        
+        segmX.append(abs(X1 - X2))
+        segmX.append(abs(X1 - X3))
+        segmX.append(abs(X2 - X3))
+
+        segmY.append(abs(Y1 - Y2))
+        segmY.append(abs(Y1 - Y3))
+        segmY.append(abs(Y2 - Y3))
+
+        for i in range(0, 3):
+            areax = segmX[i] * segmY[i] / 2
+            area_triangulos.append(areax)
+        area_quadrado = max(segmX) * max(segmY)
+        
+        areaX = area_quadrado - sum(area_triangulos)
+        resps.append(areaX)
+    
+    for r in resps:
+        print(f'{r:.3f}')
 
 
-chocolate()
+kikoho()
