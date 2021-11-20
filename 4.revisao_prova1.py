@@ -125,7 +125,22 @@ def saldo_do_vovo():
 
 
 def old_clock():
-    pass
+    while True:
+        resps = []
+        try:
+            h_angle, m_angle = map(int, input().strip().split())
+            h = h_angle/360 * 12  # 360º = 12 hours
+            m = m_angle/360 * 60  # 360º = 60 minutes
+
+            time = f'{int(h):02d}:{int(m):02d}'
+            resps.append(time)
+
+            # for r in resps:  # test answers
+            #     print(r)
+
+        except EOFError:
+            for r in resps:
+                print(r)
 
 
 def kikoho():
@@ -160,4 +175,4 @@ def kikoho():
         print(f'{r:.3f}')
 
 
-kikoho()
+old_clock()
