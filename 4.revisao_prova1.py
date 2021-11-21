@@ -109,27 +109,36 @@ def album_fotos():
 
     fit = False
     # Caso 1: As duas na Horizontal
-    if larg_pag > larg_foto1 and larg_pag > larg_foto2:
-        if alt_pag > alt_foto1 + alt_foto2:
+    if larg_pag >= larg_foto1 and larg_pag >= larg_foto2:# or alt_pag > alt_foto1 and alt_pag > alt_foto2:
+        if alt_pag >= alt_foto1 + alt_foto2:# or larg_pag > larg_foto1 + larg_foto2:
             fit = True
 
     # Caso 2: As duas na Vertical
-    if alt_pag > alt_foto1 and alt_pag > alt_foto2:
-        if larg_pag > larg_foto1 + larg_foto2:
+    if alt_pag >= alt_foto1 and alt_pag >= alt_foto2:
+        if larg_pag >= larg_foto1 + larg_foto2:
             fit = True
 
     # Caso 3: Uma na Horizontal, a outra na Vertical
-
+    cenario1 = alt_pag >= alt_foto1 + larg_foto2 and larg_pag >= larg_foto1 + alt_foto2
+    cenario2 = larg_pag >= larg_foto1 + alt_foto2 and alt_pag >= alt_foto1 + larg_foto2
+    if cenario1 or cenario2:
+        fit = True 
 
     print('S') if fit else print('N')
 
 
 def chocolate():
-    L = int(input())  # lado em cm
-    if L >= 2:
-        print(L**2) if L % 2 == 0 else print((L-1)**2)
-    else:
-        print(1)
+    largura_barra = int(input())  # a barra é quadrada
+    pedacos = 1
+    while largura_barra >= 2:
+        pedacos = pedacos * 4
+        largura_barra = largura_barra / 2
+    print(pedacos)
+    
+    # Método que não funcionou: (nao consegui testar valores para entender em qual momento ele n serve)
+    # largura_barra = int(input())
+    # if largura_barra >= 2:
+    #     print(largura_barra**2) if largura_barra % 2 == 0 else print((largura_barra-1)**2)
 
 
 def saldo_do_vovo():
@@ -147,56 +156,52 @@ def saldo_do_vovo():
 
 def old_clock():
     while True:
-        resps = []
         try:
             entry = input().strip().split()
             h_angle = int(entry[0])
             m_angle = int(entry[1])
-            # h_angle, m_angle = map(int, input().strip().split())
+            # h_angle, m_angle = map(int, input().strip().split())  # a funcao map() torna o codigo bem mais lento
+
             h = h_angle/360 * 12  # 360º = 12 hours
             m = m_angle/360 * 60  # 360º = 60 minutes
 
             time = f'{int(h):02d}:{int(m):02d}'
-            resps.append(time)
-
-            # for r in resps:  # test answers
-            #     print(r)
+            print(time)
 
         except EOFError:
-            for r in resps:
-                print(r)
+            break
 
 
 def kikoho():
-    resps = list()
-    
     test_cases = int(input())
-    for test_case in range(0, test_cases):
-        segmX = list()
-        segmY = list()
-        area_triangulos = list()
-        
+    for test_case in range(0, test_cases):        
         entry = input().strip().split()
         X1, Y1, X2, Y2, X3, Y3 = int(entry[0]), int(entry[1]), int(entry[2]), int(entry[3]), int(entry[4]), int(entry[5])
         
-        segmX.append(abs(X1 - X2))
-        segmX.append(abs(X1 - X3))
-        segmX.append(abs(X2 - X3))
+        # METODO DA DIFERENÇA DAS ÁREAS: (DÁ ERRO EM ALGUNS CASOS)
+        # segmX = list()
+        # segmY = list()
+        # area_triangulos = list()
 
-        segmY.append(abs(Y1 - Y2))
-        segmY.append(abs(Y1 - Y3))
-        segmY.append(abs(Y2 - Y3))
+        # segmX.append(abs(X1 - X2))
+        # segmX.append(abs(X1 - X3))
+        # segmX.append(abs(X2 - X3))
 
-        for i in range(0, 3):
-            areax = segmX[i] * segmY[i] / 2
-            area_triangulos.append(areax)
-        area_quadrado = max(segmX) * max(segmY)
+        # segmY.append(abs(Y1 - Y2))
+        # segmY.append(abs(Y1 - Y3))
+        # segmY.append(abs(Y2 - Y3))
+
+        # for i in range(0, 3):
+        #     areax = segmX[i] * segmY[i] / 2
+        #     area_triangulos.append(areax)
+        # area_quadrado = max(segmX) * max(segmY)
         
-        areaX = area_quadrado - sum(area_triangulos)
-        resps.append(areaX)
-    
-    for r in resps:
-        print(f'{r:.3f}')
+        # area_resp = area_quadrado - sum(area_triangulos)
 
+        # METODO DO DETERMINANTE:
+        D = ((X1*Y2 + Y1*X3 + X2*Y3) - (X3*Y2 + X2*Y1 + Y3*X1)) / 2
+        area_resp = abs(D)
 
-album_fotos()
+        print(f'{area_resp:.3f}')
+
+kikoho()
