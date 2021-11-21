@@ -100,7 +100,28 @@ def escada_rolante():
 
 
 def album_fotos():
-    pass
+    dimensao_pag = input().strip().split()
+    dimensao_foto1 = input().strip().split()
+    dimensao_foto2 = input().strip().split()
+    larg_pag, alt_pag = int(dimensao_pag[0]), int(dimensao_pag[1])
+    larg_foto1, alt_foto1 = int(dimensao_foto1[0]), int(dimensao_foto1[1])
+    larg_foto2, alt_foto2 = int(dimensao_foto2[0]), int(dimensao_foto2[1])
+
+    fit = False
+    # Caso 1: As duas na Horizontal
+    if larg_pag > larg_foto1 and larg_pag > larg_foto2:
+        if alt_pag > alt_foto1 + alt_foto2:
+            fit = True
+
+    # Caso 2: As duas na Vertical
+    if alt_pag > alt_foto1 and alt_pag > alt_foto2:
+        if larg_pag > larg_foto1 + larg_foto2:
+            fit = True
+
+    # Caso 3: Uma na Horizontal, a outra na Vertical
+
+
+    print('S') if fit else print('N')
 
 
 def chocolate():
@@ -178,4 +199,4 @@ def kikoho():
         print(f'{r:.3f}')
 
 
-old_clock()
+album_fotos()
