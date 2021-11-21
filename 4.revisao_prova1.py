@@ -128,7 +128,10 @@ def old_clock():
     while True:
         resps = []
         try:
-            h_angle, m_angle = map(int, input().strip().split())
+            entry = input().strip().split()
+            h_angle = int(entry[0])
+            m_angle = int(entry[1])
+            # h_angle, m_angle = map(int, input().strip().split())
             h = h_angle/360 * 12  # 360º = 12 hours
             m = m_angle/360 * 60  # 360º = 60 minutes
 
