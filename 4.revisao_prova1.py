@@ -36,6 +36,62 @@ def capuchin_monkey():
     while True:
         qtd_retangulos = int(input())
         if qtd_retangulos == 0:
+            print(repeatedx)
+            print(repeatedy)
+            break
+        
+        ptsX = []
+        ptsY = []
+        pts_test = []
+        for retangulo in range(0, qtd_retangulos):
+            entry = input().strip().split()
+            X1, Y1, X2, Y2 = int(entry[0]), int(entry[1]), int(entry[2]), int(entry[3])
+
+            pts_temp = []
+            for n in range(X1, X2+1):
+                pts_temp.append(n)
+                pts_test.append(n)
+            ptsX.append(pts_temp[:])
+            
+            pts_temp.clear()
+            for n in range(Y2, Y1+1):
+                pts_temp.append(n)
+            ptsY.append(pts_temp[:])
+        
+        seen = set()
+        repeatedx = set()
+        for i in range(0, len(ptsX)-1):
+            list_of_lists = [ptsX[i], ptsX[i+1]]
+        for list in list_of_lists:
+            for i in set(list):
+                if i in seen:
+                    repeatedx.add(i)
+                else:
+                    seen.add(i)
+
+        seen = set()
+        repeatedy = set()
+        for i in range(0, len(ptsY)-1):
+            list_of_lists = [ptsY[i], ptsY[i+1]]
+        for list in list_of_lists:
+            for i in set(list):
+                if i in seen:
+                    repeatedy.add(i)
+                else:
+                    seen.add(i)
+
+        resps.append(f'Teste {i}\n{min(repeatedx)} {max(repeatedy)} {max(repeatedx)} {min(repeatedy)}\n')
+        i += 1
+
+    for r in resps:
+        print(r)
+
+def capuchin_monkey2():
+    resps = []
+    i = 1
+    while True:
+        qtd_retangulos = int(input())
+        if qtd_retangulos == 0:
             break
         
         # Pegando os pontos dos retangulos
@@ -71,6 +127,7 @@ def capuchin_monkey():
 
     for r in resps:
         print(r)
+
 
 def bafo():
     resps = list()
