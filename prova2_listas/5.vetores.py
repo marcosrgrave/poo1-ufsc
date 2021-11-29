@@ -4,29 +4,29 @@ def musical_loop():
     diferença entre input1 e input2, significa que nao houve um peak,
     caso sim, houve peak
     '''
-    t = int(input())
-    vet_list = list(map(int, input().strip().split()))
+    # t = int(input())
+    # vet_list = list(map(int, input().strip().split()))
     
 
-    for i, v in enumerate(vet_list):
-        if vet_list[i+1] > v:
-            sentido = up
-        elif vet_list[i+1] < v:
-            sentido = down
-        else:
-            continue
+    # for i, v in enumerate(vet_list):
+    #     if vet_list[i+1] > v:
+    #         sentido = up
+    #     elif vet_list[i+1] < v:
+    #         sentido = down
+    #     else:
+    #         continue
 
         
-        if sentido == 0:
-            pass
+    #     if sentido == 0:
+    #         pass
     
     
-    for i, v in enumerate(vet_list):
-        if v == vet_list[1] or v == vet_list[-1]:
-            print(v)
-            continue
-        else:
-            dif = vet_list[i+1] - v
+    # for i, v in enumerate(vet_list):
+    #     if v == vet_list[1] or v == vet_list[-1]:
+    #         print(v)
+    #         continue
+    #     else:
+    #         dif = vet_list[i+1] - v
 
 
 def optical_reader():
@@ -60,7 +60,21 @@ def lowest_number_and_position():
     
 
 def fake_tickets():
-    pass
+    while True:
+        # MÉTODO 1 (NAO ROLA)
+        # o, p = input().strip().split()
+        # original_tickets, persons_attending = int(o), int(p)
+        
+        a = input().split()
+        if '0' in a:
+            break
+        ticket_numbers = list(map(int, input().strip().split()))
+        st = set(ticket_numbers)
+        s = 0
+        for v in ticket_numbers:
+            if v in st:
+                s += 1
+        print(s - len(st))
 
 
 def XXXXXXXXXXXXXX():
@@ -81,4 +95,14 @@ def XXXXXXXXXXXXXX():
 
 
 
-lowest_number_and_position()
+fake_tickets()
+
+
+from time import perf_counter
+def start_code_time():
+    return perf_counter()
+    
+def end_code_time(start_code_time):
+    end_code = perf_counter()
+    time_code = end_code - start_code_time
+    return time_code
