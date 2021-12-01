@@ -29,7 +29,7 @@ def musical_loop():
     #         dif = vet_list[i+1] - v
 
 
-def optical_reader():
+def optical_reader():  # OK
     resps = []
     while True:
         total_answers = int(input())
@@ -51,7 +51,7 @@ def optical_reader():
         print(r)
 
 
-def lowest_number_and_position():
+def lowest_number_and_position():  # OK
     int(input())
     numbers = list(map(int, input().strip().split()))
     r = min(numbers)
@@ -77,8 +77,51 @@ def fake_tickets():
         print(s - len(st))
 
 
-def XXXXXXXXXXXXXX():
-    pass
+def head_or_tail():  # TESTAR NO BEECROWD
+    while True:
+        flag = int(input())
+        
+        if flag == 0:
+            break
+        else:
+            games = list(map(int, input().strip().split()))
+            sum0 = sum1 = 0
+            for result in games:
+                if result == 0:
+                    sum0 += 1
+                else:
+                    sum1 += 1
+            
+            print(f'Mary won {sum0} times and John won {sum1} times')
+
+
+def sticks_game():  # TESTAR NO BEECROWD
+    '''
+    sticks with variable sizes;
+    draw rectangles with these sticks;
+    each stick can be used in only one rectangle;
+    two kids with one set of sticks each;
+    wins who draw the most rectangles.
+    '''
+    while True:
+        number_of_sets = int(input())
+        if number_of_sets == 0:
+            break
+        else:
+            four_sides = []
+            two_sides = []
+
+            for set in range(0, number_of_sets):
+                size, amount = map(int, input().strip().split())
+                if amount >= 4:
+                    full = amount // 4
+                    four_sides.append(full)
+                elif amount >= 2:
+                    half = amount // 2
+                    two_sides.append(half)
+                
+            total_rectangles = sum(four_sides) + sum(two_sides)//2
+            print(total_rectangles)
 
 
 def XXXXXXXXXXXXXX():
@@ -89,13 +132,9 @@ def XXXXXXXXXXXXXX():
     pass
 
 
-def XXXXXXXXXXXXXX():
-    pass
 
 
-
-
-fake_tickets()
+sticks_game()
 
 
 from time import perf_counter
