@@ -221,22 +221,27 @@ def sansas_snow_castle():  # AINDA NAO TENTEI
     beautiful = towers[1] > towers[0]
 
 
-def jumping_frog():  # ERRO
+def jumping_frog():  # OK
     frog_jump_height, total_pipes = map(int, input().strip().split())
     pipes_height = list(map(int, input().strip().split()))
     
     toohigh_or_toolow = False
     for i, pipe_height in enumerate(pipes_height):
         base = pipe_height if i == 0 else pipes_height[i-1]
-        if abs(base - pipe_height) >= frog_jump_height:
+        if abs(base - pipe_height) > frog_jump_height:
             toohigh_or_toolow = True
             break
 
     print('YOU WIN') if not toohigh_or_toolow else print('GAME OVER')
 
 
-def XXXXXXXXXXXXXXXXXXXX():
-    pass
+def airport():
+    while True:
+        airports, flights = map(int, input().strip().split())
+        if airports == flights == 0:
+            break
+        for f in range(0, flights):
+            flight, airport = map(int, input().strip().split())        
 
 
 def XXXXXXXXXXXXXXXXXXXX():
@@ -248,7 +253,7 @@ def XXXXXXXXXXXXXXXXXXXX():
 
 
 
-sticks_game()
+jumping_frog()
 
 # PARA MEDIR A PERFORMANCE DO CODIGO:
     # from time import perf_counter
