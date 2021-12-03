@@ -1,3 +1,6 @@
+from typing import Counter
+
+
 def musical_loop():  # AINDA NAO TENTEI
     '''
     se a diferença entre o input3 e o input2 for de mesmo sinal que a
@@ -237,12 +240,69 @@ def jumping_frog():  # OK
 
 def airport():
     while True:
+        c = 1
         airports, flights = map(int, input().strip().split())
         if airports == flights == 0:
             break
+        total_list = []
         for f in range(0, flights):
-            flight, airport = map(int, input().strip().split())        
+            airport1, airport2 = map(int, input().strip().split())
+            total_list.append(airport1)
+            total_list.append(airport2)
+        count = Counter(total_list)
+        max = [0]
+        for value in count.values():
+            if value > max[0]:
+                max.clear()
+                max.append(value)
+            elif value == max[0]:
+                max.append(value)
+        if len(max) == 1:
+            result = count[max[0]]
+            # print(result)
+            only_one = True
+        else:
+            only_one = False
+            keys = []
+            for key in count:
+                if count[key] == max[0]:
+                    keys.append(key)
+        print(f'Teste {c}')
+        if only_one:
+            print(result)
+        else:
+            for i, k in enumerate(keys):
+                print(k, end=' ') if i < len(keys)-1 else print(k)
+        print()
+        c += 1
 
+
+# lista = [1, 2, 2, 3, 3, 4, 5, 5, 5]
+# i = 0
+# lista.insert(i, 2)
+# lista.remove(lista[i+1])
+# print(lista)
+# c = Counter(lista)
+# print(c)
+# a = max(Counter(lista).values())
+# # print(a)
+# max = [0]
+# for qtd in c.values():
+#     if qtd > max[0]:
+#         max.clear()
+#         max.append(qtd)
+#     elif qtd == max[0]:
+#         max.append(qtd)
+# print(max)
+# print(c[0], c)
+# if len(max) > 1:
+#     keys = []
+#     for key in c:
+#         if c[key] == max[0]:
+#             keys.append(key)
+#     print(sorted(keys))
+# else:
+#     print(c[max[0]])
 
 def XXXXXXXXXXXXXXXXXXXX():
     pass
@@ -253,7 +313,7 @@ def XXXXXXXXXXXXXXXXXXXX():
 
 
 
-jumping_frog()
+airport()
 
 # PARA MEDIR A PERFORMANCE DO CODIGO:
     # from time import perf_counter
