@@ -1,5 +1,3 @@
-from typing import Counter
-
 
 def musical_loop():  # AINDA NAO TENTEI
     '''
@@ -238,71 +236,81 @@ def jumping_frog():  # OK
     print('YOU WIN') if not toohigh_or_toolow else print('GAME OVER')
 
 
-def airport():
+from typing import Counter
+
+
+def airport():  # ERRO
+    c = 1
     while True:
-        c = 1
+        keys = []
         airports, flights = map(int, input().strip().split())
         if airports == flights == 0:
             break
+        
         total_list = []
         for f in range(0, flights):
             airport1, airport2 = map(int, input().strip().split())
+            # total_list.append(airport1)
+            # total_list.append(airport2)
             total_list.append(airport1)
             total_list.append(airport2)
-        count = Counter(total_list)
-        max = [0]
-        for value in count.values():
-            if value > max[0]:
-                max.clear()
-                max.append(value)
-            elif value == max[0]:
-                max.append(value)
-        if len(max) == 1:
-            result = count[max[0]]
-            # print(result)
-            only_one = True
-        else:
-            only_one = False
-            keys = []
-            for key in count:
-                if count[key] == max[0]:
-                    keys.append(key)
-        print(f'Teste {c}')
-        if only_one:
-            print(result)
-        else:
-            for i, k in enumerate(keys):
-                print(k, end=' ') if i < len(keys)-1 else print(k)
-        print()
-        c += 1
+        
+        total_list = sorted(total_list)
+        print(total_list)
+
+        sums = []
+        indices = []
+        sum = 0
+        ini = min(total_list)
+        for i, v in enumerate(total_list):
+            if v == ini:
+                sum += 1
+            else:
+                sums.append(sum)
+                ind = i - 1
+                indices.append(ind)
+                sum = 1
+                ini = v
+        print(sums)
+        print(indices)
+        result = []
+        for i, s in enumerate(sums):
+            if s == max(sums):
+                result.append(total_list[indices[i]])
+        print(result)
+# 2 3
+# 7 4
+# 6 5
+# 5 6
+# 7 3
+# 2 1
+# 6 8
+# 9 3
 
 
-# lista = [1, 2, 2, 3, 3, 4, 5, 5, 5]
-# i = 0
-# lista.insert(i, 2)
-# lista.remove(lista[i+1])
-# print(lista)
-# c = Counter(lista)
-# print(c)
-# a = max(Counter(lista).values())
-# # print(a)
-# max = [0]
-# for qtd in c.values():
-#     if qtd > max[0]:
-#         max.clear()
-#         max.append(qtd)
-#     elif qtd == max[0]:
-#         max.append(qtd)
-# print(max)
-# print(c[0], c)
-# if len(max) > 1:
-#     keys = []
-#     for key in c:
-#         if c[key] == max[0]:
-#             keys.append(key)
-#     print(sorted(keys))
-# else:
-#     print(c[max[0]])
+
+        # count = Counter(total_list)
+        # max = [0]
+        # for value in count.values():
+        #     if value > max[0]:
+        #         max.clear()
+        #         max.append(value)
+        #     elif value == max[0]:
+        #         max.append(value)
+        
+        # temp_keys = []
+        # for key in count:
+        #     if count[key] == max[0]:
+        #         temp_keys.append(key)
+        # keys.append(temp_keys)
+        # keys = sorted(keys)
+
+        # print(f'Teste {c}')
+        # for k in keys:
+        #     for v in k:
+        #         print(v) if v == k[-1] else print(v, end=' ')
+        # print()
+
 
 def XXXXXXXXXXXXXXXXXXXX():
     pass
