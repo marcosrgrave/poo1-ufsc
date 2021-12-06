@@ -309,7 +309,7 @@ def airport():  # ERRO
         # print()
 
 
-def maratona():  # AVALIANDO
+def maratona():  # AVALIAR
     entry = input().strip().split()
     dist_interm_max = int(entry[1])  # metros
     pos_postos_agua = list(map(int, input().strip().split()))  # metros
@@ -321,7 +321,7 @@ def maratona():  # AVALIANDO
     print('S') if consegue_terminar else print('N')
 
 
-def pulo_do_sapo():
+def pulo_do_sapo():  # AVALIAR
     num_pedras, num_sapos = map(int, input().strip().split())
     pedras_lista = []
     for pedra in range(1, num_pedras+1):
@@ -349,28 +349,9 @@ def pulo_do_sapo():
         print('1') if pedras_lista[i] in possibs else print('0')
 
 
-def XXXXXXXXXXXXXXXXXXXX():
+def campo_minado():
     pass
 
-
-def XXXXXXXXXXXXXXXXXXXX():
-    pass
-
-
-def XXXXXXXXXXXXXXXXXXXX():
-    pass
-
-
-def XXXXXXXXXXXXXXXXXXXX():
-    pass
-
-
-def XXXXXXXXXXXXXXXXXXXX():
-    pass
-
-
-def XXXXXXXXXXXXXXXXXXXX():
-    pass
 
 
 
