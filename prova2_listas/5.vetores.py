@@ -1,36 +1,44 @@
-
-from typing import TextIO
-
-
 def musical_loop():  # FALTA TERMINAR
     '''
     se a diferença entre o input3 e o input2 for de mesmo sinal que a
     diferença entre input1 e input2, significa que nao houve um peak,
     caso sim, houve peak
+
+    .*. (Portanto)
+    
+    dif1 = i[2] - i[1]
+    dif2 = i[1] - i[0]
+    if dif1 > 0 and dif2 > 0:
+        peaks += 0
+        nao_houve_peak
+    else:
+        peaks += 1
     '''
-    # t = int(input())
-    # vet_list = list(map(int, input().strip().split()))
-    
-
-    # for i, v in enumerate(vet_list):
-    #     if vet_list[i+1] > v:
-    #         sentido = up
-    #     elif vet_list[i+1] < v:
-    #         sentido = down
-    #     else:
-    #         continue
-
-        
-    #     if sentido == 0:
-    #         pass
-    
-    
-    # for i, v in enumerate(vet_list):
-    #     if v == vet_list[1] or v == vet_list[-1]:
-    #         print(v)
-    #         continue
-    #     else:
-    #         dif = vet_list[i+1] - v
+ 
+    while True:
+        flag = int(input())
+        if flag == 0:
+            break
+        vet_list = list(map(int, input().strip().split()))
+        before = trocou_sinal = 0
+        difs = []
+        for i, v in enumerate(vet_list):
+            if i == 0 and len(vet_list) >= 2:
+                dif = v
+                difs.append(dif)
+                before = dif
+            if i != len(vet_list)-1:
+                dif = vet_list[i+1] - vet_list[i]
+                difs.append(dif)
+                if before >= 0 and dif >= 0:
+                    trocou_sinal += 0
+                elif before <= 0 and dif <= 0:
+                    trocou_sinal += 0
+                else:
+                    trocou_sinal += 1
+                before = dif
+        print(difs)
+        print(trocou_sinal)
 
 
 def optical_reader():  # OK
@@ -378,7 +386,7 @@ def campo_minado():  # OK
 
 
 
-fake_tickets()
+musical_loop()
 
 # PARA MEDIR A PERFORMANCE DO CODIGO:
     # from time import perf_counter
