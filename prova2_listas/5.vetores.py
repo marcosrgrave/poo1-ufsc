@@ -1,4 +1,7 @@
 
+from typing import TextIO
+
+
 def musical_loop():  # FALTA TERMINAR
     '''
     se a diferença entre o input3 e o input2 for de mesmo sinal que a
@@ -60,22 +63,24 @@ def lowest_number_and_position():  # OK
     print(f'Menor valor: {r}\nPosicao: {i}')
     
 
-def fake_tickets():  # FALTA TERMINAR
-    while True:
-        # MÉTODO 1 (NAO ROLA)
-        # o, p = input().strip().split()
-        # original_tickets, persons_attending = int(o), int(p)
-        
+def fake_tickets():  # OK
+    while True:       
         a = input().split()
         if '0' in a:
             break
         ticket_numbers = list(map(int, input().strip().split()))
         st = set(ticket_numbers)
-        s = 0
-        for v in ticket_numbers:
-            if v in st:
+        s = sum_added =0
+        numbers_added = []
+        repeated = []
+        for ticket in ticket_numbers:
+            if ticket in numbers_added:
+                repeated.append(ticket)
+                sum_added += 1
+            if ticket in st and ticket not in numbers_added:
                 s += 1
-        print(s - len(st))
+                numbers_added.append(ticket)
+        print(len(set(repeated)))
 
 
 def head_or_tail():  # OK
@@ -321,7 +326,7 @@ def maratona():  # AVALIAR
     print('S') if consegue_terminar else print('N')
 
 
-def pulo_do_sapo():  # AVALIAR
+def pulo_do_sapo():  # OK
     num_pedras, num_sapos = map(int, input().strip().split())
     pedras_lista = []
     for pedra in range(1, num_pedras+1):
@@ -349,14 +354,31 @@ def pulo_do_sapo():  # AVALIAR
         print('1') if pedras_lista[i] in possibs else print('0')
 
 
-def campo_minado():
-    pass
+def campo_minado():  # OK
+    qtd_minas = int(input())
+    total_mines = []
+    for mina in range(0, qtd_minas):
+        is_mine = int(input())
+        total_mines.append(is_mine)
+        # só somar: anterior + atual + proximo
+    for i, mine in enumerate(total_mines):
+        sum = 0
+        if len(total_mines) > 1:
+            if i == 0:
+                sum = mine + total_mines[i+1]
+                # print(sum, 1)
+            elif i == len(total_mines)-1:
+                sum = total_mines[i-1] + mine
+                # print(sum, 2)
+            else:
+                sum = total_mines[i-1] + mine + total_mines[i+1]
+                # print(sum, 3)
+        print(sum)
 
 
 
 
-
-pulo_do_sapo()
+fake_tickets()
 
 # PARA MEDIR A PERFORMANCE DO CODIGO:
     # from time import perf_counter
