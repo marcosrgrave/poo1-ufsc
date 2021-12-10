@@ -1,44 +1,21 @@
-def musical_loop():  # FALTA TERMINAR
-    '''
-    se a diferença entre o input3 e o input2 for de mesmo sinal que a
-    diferença entre input1 e input2, significa que nao houve um peak,
-    caso sim, houve peak
 
-    .*. (Portanto)
-    
-    dif1 = i[2] - i[1]
-    dif2 = i[1] - i[0]
-    if dif1 > 0 and dif2 > 0:
-        peaks += 0
-        nao_houve_peak
-    else:
-        peaks += 1
-    '''
- 
+def musical_loop():  # OK
     while True:
         flag = int(input())
         if flag == 0:
             break
+        
         vet_list = list(map(int, input().strip().split()))
-        before = trocou_sinal = 0
-        difs = []
-        for i, v in enumerate(vet_list):
-            if i == 0 and len(vet_list) >= 2:
-                dif = v
-                difs.append(dif)
-                before = dif
+        
+        peaks = 0
+        for i, pt in enumerate(vet_list):
             if i != len(vet_list)-1:
-                dif = vet_list[i+1] - vet_list[i]
-                difs.append(dif)
-                if before >= 0 and dif >= 0:
-                    trocou_sinal += 0
-                elif before <= 0 and dif <= 0:
-                    trocou_sinal += 0
-                else:
-                    trocou_sinal += 1
-                before = dif
-        print(difs)
-        print(trocou_sinal)
+                vet = [vet_list[i-1], vet_list[i], vet_list[i+1]]
+            else:
+                vet = [vet_list[i-1], vet_list[i], vet_list[0]]
+            if vet[1] == max(vet) or vet[1] == min(vet):
+                peaks += 1
+        print(peaks)
 
 
 def optical_reader():  # OK
@@ -68,8 +45,7 @@ def lowest_number_and_position():  # OK
     numbers = list(map(int, input().strip().split()))
     r = min(numbers)
     i = numbers.index(r)
-    print(f'Menor valor: {r}\nPosicao: {i}')
-    
+ 
 
 def fake_tickets():  # OK
     while True:       
@@ -109,7 +85,7 @@ def head_or_tail():  # OK
             print(f'Mary won {sum0} times and John won {sum1} times')
 
 
-def sticks_game():  # ERRO
+def sticks_game():  # OK
     '''
     sticks with variable sizes;
     draw rectangles with these sticks;
@@ -117,41 +93,25 @@ def sticks_game():  # ERRO
     two kids with one set of sticks each;
     wins who draw the most rectangles.
     '''
-    resps = []
+
     while True:
         number_of_sets = int(input())
         if number_of_sets == 0:
             break
-        else:
-            four_sides = []
-            two_sides = []
-
-            for set in range(0, number_of_sets):
-                size, amount = map(int, input().strip().split())
-                if amount >= 4:
-                    full = amount // 4
-                    four_sides.append(full)
-                elif amount >= 2:
-                    half = amount // 2
-                    two_sides.append(half)
-                
-            total_rectangles = sum(four_sides) + sum(two_sides)//2
-            resps.append(total_rectangles)
-    
-    for r in resps:
-        print(r)
+        two_sides = []
+        for set in range(number_of_sets):
+            size, amount = map(int, input().strip().split())
+            two_sides.append(amount//2)
+        print(sum(two_sides)//2)
 
 
-def dangerous_dive():  # ERRO. OTIMIZAR TEMPO DO CODIGO
+def dangerous_dive():  # OK
     while True:
-        resps = []
         try:
-            # went, returned = map(int, input().strip().split())
-            # returned_list = list(map(int, input().strip().split()))
             went, returned = input().strip().split()
-            went = int(went)
+            went = int(went)  # or -> went, returned = map(int, input().strip().split())
             returned_string = input().strip().split()
-            returned_list = []
+            returned_list = []  # or -> returned_list = list(map(int, input().strip().split()))
             for ret in returned_string:
                 ret = int(ret)
                 returned_list.append(ret)
@@ -166,18 +126,15 @@ def dangerous_dive():  # ERRO. OTIMIZAR TEMPO DO CODIGO
                     not_returned_list.append(volunteer)
             
             if not_returned_list == []:
-                # print('*')
-                resps.append('*')
+                print('*')
             else:    
                 for v in not_returned_list:
                     # print(v) if v == not_returned_list[-1] else print(v, end=' ')
-                    a = f'{v} '
-                    resps.append(v) if v == not_returned_list[-1] else resps.append(a)
+                    print(v, end=' ')
+                print()
             
         except EOFError:
-            # break
-            for r in resps:
-                print(r)
+            break
 
 
 def biochemical_digital_circuit():  # ERRO
@@ -386,7 +343,7 @@ def campo_minado():  # OK
 
 
 
-musical_loop()
+dangerous_dive()
 
 # PARA MEDIR A PERFORMANCE DO CODIGO:
     # from time import perf_counter
