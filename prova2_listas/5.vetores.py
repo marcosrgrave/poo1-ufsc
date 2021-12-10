@@ -143,12 +143,24 @@ def biochemical_digital_circuit():  # ERRO
         if nodes == 0 and measures == 0 and min_length == 0:
             break
         else:
-            s = 0
+            bins = []
             for m in range(0, measures):
                 binary = list(map(int, input().strip().split()))
-                if sum(binary) >= min_length:
-                    s += 1
-            print(s)
+                bins.append(binary)
+            
+            final = 0
+            for i in range(nodes):
+                s = 0
+                for b in bins:
+                    # print(f'i: {i} | b: {b[i]}')
+                    if i == measures:
+                        break
+                    elif b[i+1] == b[i] == 1:
+                        s += 1
+                    if s == min_length:
+                        final += 1
+                        break
+            print(final)
 
 
 def detective_watson():  # OK
@@ -343,7 +355,7 @@ def campo_minado():  # OK
 
 
 
-dangerous_dive()
+biochemical_digital_circuit()
 
 # PARA MEDIR A PERFORMANCE DO CODIGO:
     # from time import perf_counter
