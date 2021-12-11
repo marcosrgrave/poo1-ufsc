@@ -284,11 +284,13 @@ def maratona():  # ERRO
     pos_postos_agua = list(map(int, input().strip().split()))  # metros
     dist_maratona = 42195  # metros
     dif = 0
-    for posto in pos_postos_agua:
+    
+    for i, posto in enumerate(pos_postos_agua):
         if posto == pos_postos_agua[-1]:
             dif = dist_maratona - posto
         else:
-            dif = posto - dif
+            dif = pos_postos_agua[i+1] - posto
+
         if dist_interm_max >= dif:
             consegue_terminar = True
         else:
@@ -349,4 +351,4 @@ def campo_minado():  # OK
 
 
 
-sansas_snow_castle()
+maratona()
