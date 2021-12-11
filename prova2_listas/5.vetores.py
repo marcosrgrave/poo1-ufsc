@@ -1,3 +1,13 @@
+# PARA MEDIR A PERFORMANCE DO CODIGO:
+from time import perf_counter
+def start_code_time():
+    return perf_counter()
+    
+def end_code_time(start_code_time):
+    end_code = perf_counter()
+    time_code = end_code - start_code_time
+    return time_code
+
 
 def musical_loop():  # OK
     while True:
@@ -138,11 +148,8 @@ def dangerous_dive():  # OK
 
 
 def biochemical_digital_circuit():  # OK
-    start_code_time()
     while True:
-        entry = input().strip().split()
-        # nodes, measures, min_length = map(int, input().strip().split())
-        nodes, measures, min_length = int(entry[0]), int(entry[1]), int(entry[2])
+        nodes, measures, min_length = map(int, input().strip().split())
         if nodes == 0 and measures == 0 and min_length == 0:
             break
         else:
@@ -162,7 +169,6 @@ def biochemical_digital_circuit():  # OK
                     else:
                         s = 0
             print(answer)
-    end_code_time()
 
 
 def detective_watson():  # OK
@@ -323,13 +329,3 @@ def campo_minado():  # OK
 
 
 biochemical_digital_circuit()
-
-# PARA MEDIR A PERFORMANCE DO CODIGO:
-from time import perf_counter
-def start_code_time():
-    return perf_counter()
-    
-def end_code_time(start_code_time):
-    end_code = perf_counter()
-    time_code = end_code - start_code_time
-    return time_code
