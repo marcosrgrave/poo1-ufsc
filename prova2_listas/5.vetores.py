@@ -137,7 +137,7 @@ def dangerous_dive():  # OK
             break
 
 
-def biochemical_digital_circuit():  # ERRO
+def biochemical_digital_circuit():  # OK
     while True:
         nodes, measures, min_length = map(int, input().strip().split())
         if nodes == 0 and measures == 0 and min_length == 0:
@@ -147,20 +147,18 @@ def biochemical_digital_circuit():  # ERRO
             for m in range(0, measures):
                 binary = list(map(int, input().strip().split()))
                 bins.append(binary)
-            
-            final = 0
-            for i in range(nodes):
+
+            answer = 0
+            for i in range(nodes):  # troca na horizontal até a qtd de nodes
                 s = 0
-                for b in bins:
-                    # print(f'i: {i} | b: {b[i]}')
-                    if i == measures:
-                        break
-                    elif b[i+1] == b[i] == 1:
+                for line in bins:  # troca na vertical
+                    if line[i] == 1:
                         s += 1
-                    if s == min_length:
-                        final += 1
-                        break
-            print(final)
+                        if s == min_length:
+                            answer += 1
+                    else:
+                        s = 0
+            print(answer)
 
 
 def detective_watson():  # OK
@@ -221,7 +219,6 @@ def jumping_frog():  # OK
 def airport():  # ERRO
     c = 1
     while True:
-        keys = []
         airports, flights = map(int, input().strip().split())
         if airports == flights == 0:
             break
@@ -229,8 +226,6 @@ def airport():  # ERRO
         total_list = []
         for f in range(0, flights):
             airport1, airport2 = map(int, input().strip().split())
-            # total_list.append(airport1)
-            # total_list.append(airport2)
             total_list.append(airport1)
             total_list.append(airport2)
         
@@ -257,38 +252,6 @@ def airport():  # ERRO
             if s == max(sums):
                 result.append(total_list[indices[i]])
         print(result)
-
-        # 2 3
-        # 7 4
-        # 6 5
-        # 5 6
-        # 7 3
-        # 2 1
-        # 6 8
-        # 9 3
-
-        # from typing import Counter
-        # count = Counter(total_list)
-        # max = [0]
-        # for value in count.values():
-        #     if value > max[0]:
-        #         max.clear()
-        #         max.append(value)
-        #     elif value == max[0]:
-        #         max.append(value)
-        
-        # temp_keys = []
-        # for key in count:
-        #     if count[key] == max[0]:
-        #         temp_keys.append(key)
-        # keys.append(temp_keys)
-        # keys = sorted(keys)
-
-        # print(f'Teste {c}')
-        # for k in keys:
-        #     for v in k:
-        #         print(v) if v == k[-1] else print(v, end=' ')
-        # print()
 
 
 def maratona():  # AVALIAR
