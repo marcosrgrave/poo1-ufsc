@@ -207,9 +207,25 @@ def brazilian_economy():  # OK
     print('N') if not_ok >= majority or not_ok == citizens/2 else print('Y')
 
 
-def sansas_snow_castle():  # FALTA TERMINAR
-    towers, peaks = map(int, input().strip().split())
-    beautiful = towers[1] > towers[0]
+def sansas_snow_castle():  # OK
+    amount_towers, necessary_peaks = map(int, input().strip().split())    
+    towers = list(map(int, input().strip().split()))
+    
+    peaks = 0
+    valleys = 0
+    for i, pt in enumerate(towers):
+        if i == 0 or i == len(towers)-1:
+            continue        
+        elif i != len(towers)-1:
+            vet = [towers[i-1], towers[i], towers[i+1]]
+        if vet[1] == max(vet):
+            peaks += 1
+        if vet[1] == min(vet):
+            valleys += 1
+    if peaks == necessary_peaks and valleys == peaks-1:
+        print('beautiful')
+    else:
+        print('ugly')
 
 
 def jumping_frog():  # OK
@@ -226,53 +242,58 @@ def jumping_frog():  # OK
     print('YOU WIN') if not toohigh_or_toolow else print('GAME OVER')
 
 
-def airport():  # ERRO
-    c = 1
+def airport():  # OK
+    c = 0
     while True:
         airports, flights = map(int, input().strip().split())
         if airports == flights == 0:
             break
         
-        total_list = []
-        for f in range(0, flights):
-            airport1, airport2 = map(int, input().strip().split())
-            total_list.append(airport1)
-            total_list.append(airport2)
-        
-        total_list = sorted(total_list)
-        print(total_list)
-
+        arprts = []
         sums = []
-        indices = []
-        sum = 0
-        ini = min(total_list)
-        for i, v in enumerate(total_list):
-            if v == ini:
-                sum += 1
-            else:
-                sums.append(sum)
-                ind = i - 1
-                indices.append(ind)
-                sum = 1
-                ini = v
-        print(sums)
-        print(indices)
-        result = []
-        for i, s in enumerate(sums):
-            if s == max(sums):
-                result.append(total_list[indices[i]])
-        print(result)
+        for flight in range(airports):
+            arprts.append(flight+1)
+            sums.append(0)
+
+        for f in range(flights):
+            airp1, airp2 = map(int, input().strip().split())
+            if airp1 in arprts:
+                i1 = arprts.index(airp1)
+                sums[i1] += 1
+            if airp2 in arprts:
+                i2 = arprts.index(airp2)
+                sums[i2] += 1
+
+        maxim = max(sums)
+        indexs = []
+        for i, v in enumerate(sums):
+            if v == maxim:
+                indexs.append(i)
+
+        # Printando os resultados
+        c += 1
+        print(f'Teste {c}')
+        for i in range(len(indexs)):
+            print(arprts[indexs[i]], end=' ')
+        print('\n')
 
 
-def maratona():  # AVALIAR
+def maratona():  # ERRO
     entry = input().strip().split()
     dist_interm_max = int(entry[1])  # metros
     pos_postos_agua = list(map(int, input().strip().split()))  # metros
-    # dist_maratona = 42195  # metros
+    dist_maratona = 42195  # metros
     dif = 0
     for posto in pos_postos_agua:
-        dif = posto - dif
-        consegue_terminar = True if dist_interm_max >= dif else False
+        if posto == pos_postos_agua[-1]:
+            dif = dist_maratona - posto
+        else:
+            dif = posto - dif
+        if dist_interm_max >= dif:
+            consegue_terminar = True
+        else:
+            consegue_terminar = False
+            break
     print('S') if consegue_terminar else print('N')
 
 
@@ -328,4 +349,4 @@ def campo_minado():  # OK
 
 
 
-biochemical_digital_circuit()
+sansas_snow_castle()
