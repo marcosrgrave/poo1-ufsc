@@ -278,7 +278,7 @@ def airport():  # OK
         print('\n')
 
 
-def maratona():  # ERRO
+def maratona():  # ENVIAR DE NOVO, TAVA DANDO CLOSED
     entry = input().strip().split()
     dist_interm_max = int(entry[1])  # metros
     pos_postos_agua = list(map(int, input().strip().split()))  # metros
