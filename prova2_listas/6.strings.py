@@ -22,16 +22,49 @@ def contract_revision():  # OK, MAS NAO CURTI O CODIGO
             print()
 
 
-def flowers_france():
-    pass
+def flowers_france():  # OK
+    while True:
+        phrase: str = input().strip().split()
+        if '*' in phrase:
+            break
+        
+        tautograms: bool = True
+        for word in phrase:
+            if word == phrase[0]:
+                char = word[0]
+            else:
+                if char.upper() != word[0].upper():
+                    tautograms = False
+        print('Y') if tautograms else print('N')
 
 
-def led():
-    pass
+def led():  # OK
+    digit_led = [6, 2, 5, 5, 4, 5, 6, 3, 7, 6]
+    #            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+
+    test_cases = int(input())
+    for test in range(test_cases):
+        s = 0
+        number = input()
+        for n in number:
+            s += digit_led[int(n)]
+        print(s, 'leds')
 
 
 def wertyu():
-    pass
+    while True:
+        try:
+            querty = "1234567890-=QWERTYUIOP[]\\ASDFGHJKL;'ZXCVBNM,./"
+            txt = input().strip()
+            for char in txt:
+                if char == ' ':
+                    print(' ', end='')
+                else:
+                    i = querty.index(char.upper())
+                    print(querty[i-1], end='')
+            print()
+        except EOFError:
+            break
 
 
 def combiner():
@@ -90,4 +123,4 @@ def binary_phrase():
     pass
 
 
-contract_revision()
+wertyu()
