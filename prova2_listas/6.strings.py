@@ -51,7 +51,7 @@ def led():  # OK
         print(s, 'leds')
 
 
-def wertyu():  # INCOMPLETO
+def wertyu():  # Presentation Error
     # tá faltando um print na ultima linha de todas (udebug)
     while True:
         try:
