@@ -83,20 +83,79 @@ def wertyu():  # INCOMPLETO
         #     break
 
 
-def combiner():
-    pass
+def combiner():  # OK
+    test_cases : int = int(input())
+    for test in range(test_cases):
+        words : str = input().strip().split()
+        for i in range(max(len(words[0]), len(words[1]))):
+            if i < len(words[0]):
+                print(words[0][i], end='')
+            if i < len(words[1]):
+                print(words[1][i], end='')
+        print()
 
 
-def lost_boots():
-    pass
+def lost_boots():  # OK
+    while True:
+        try:
+            tests = int(input())
+            d_sizes, e_sizes, pairs = [], [], []
+            for t in range(tests):
+                boot_size, foot = input().strip().split()
+                if foot == 'D':
+                    if boot_size in e_sizes:
+                        pairs.append([boot_size, boot_size])
+                        e_sizes.remove(boot_size)
+                    else:
+                        d_sizes.append(boot_size)
+                else:
+                    if boot_size in d_sizes:
+                        pairs.append([boot_size, boot_size])
+                        d_sizes.remove(boot_size)
+                    else:
+                        e_sizes.append(boot_size)
+            # print(pairs)
+            print(len(pairs))
+        except EOFError:
+            break
 
 
-def binary_watch():
-    pass
+def binary_watch():  # FALTA FAZER
+    print(f''' ____________________________________________
+    |                                            |
+    |    ____________________________________    |_
+    |   |                                    |   |_)
+    |   |   8         4         2         1  |   |
+    |   |                                    |   |
+    |   |  {'o'}        {'o'}                      |   |
+    |   |                                    |   |
+    |   |                                    |   |
+    |   |         o                          |   |
+    |   |                                    |   |
+    |   |   32    16    8     4     2     1  |   |_
+    |   |____________________________________|   |_)
+    |                                            |
+    |____________________________________________|''')
 
 
-def deli_deli():
-    pass
+def deli_deli():  # OK
+    qtd_description, qtd_test_words = map(int, input().strip().split())
+    sings, plurs = [], []
+    for desc in range(qtd_description):
+        singular, plural = input().strip().split()
+        sings.append(singular)
+        plurs.append(plural)
+    for test in range(qtd_test_words):
+        word = input()
+        if word in sings:
+            i = sings.index(word)
+            print(plurs[i])
+        elif word[-2] not in 'aeiou' and word[-1] == 'y':
+            print(word.replace('y', 'ies'))
+        elif word[-1] in 'osx' or word[-2:] in 'ch' or word[-2:] in 'sh':
+            print(word.__add__('es'))
+        else:
+            print(word.__add__('s'))
 
 
 def the_martian():
@@ -139,4 +198,4 @@ def binary_phrase():
     pass
 
 
-wertyu()
+the_martian()
