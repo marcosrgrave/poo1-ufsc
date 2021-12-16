@@ -1,4 +1,4 @@
-def contract_revision():  # OK, MAS NAO CURTI O CODIGO
+def contract_revision():  # Ok, mas dá pra fazer bem melhor
     # Acho que dá pra simplificar bem mais
     while True:
         failed_digit, number_in_contract = input().strip().split()
@@ -22,7 +22,7 @@ def contract_revision():  # OK, MAS NAO CURTI O CODIGO
             print()
 
 
-def flowers_france():  # OK
+def flowers_france():  # Ok
     while True:
         phrase: str = input().strip().split()
         if '*' in phrase:
@@ -38,7 +38,7 @@ def flowers_france():  # OK
         print('Y') if tautograms else print('N')
 
 
-def led():  # OK
+def led():  # Ok
     digit_led = [6, 2, 5, 5, 4, 5, 6, 3, 7, 6]
     #            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 
@@ -83,7 +83,7 @@ def wertyu():  # Presentation Error
         #     break
 
 
-def combiner():  # OK
+def combiner():  # Ok
     test_cases : int = int(input())
     for test in range(test_cases):
         words : str = input().strip().split()
@@ -95,7 +95,7 @@ def combiner():  # OK
         print()
 
 
-def lost_boots():  # OK
+def lost_boots():  # Ok
     while True:
         try:
             tests = int(input())
@@ -120,7 +120,7 @@ def lost_boots():  # OK
             break
 
 
-def binary_watch():  # FALTA FAZER
+def binary_watch():  # Falta Fazer
     print(f''' ____________________________________________
     |                                            |
     |    ____________________________________    |_
@@ -138,7 +138,7 @@ def binary_watch():  # FALTA FAZER
     |____________________________________________|''')
 
 
-def deli_deli():  # OK
+def deli_deli():  # Ok
     qtd_description, qtd_test_words = map(int, input().strip().split())
     sings, plurs = [], []
     for desc in range(qtd_description):
@@ -158,32 +158,84 @@ def deli_deli():  # OK
             print(word.__add__('s'))
 
 
-def the_martian():
+def the_martian():  # Falta Fazer
     pass
 
 
-def name_at_form():
+def name_at_form():  # Ok
+    txt = input()
+    print('YES') if len(txt) <= 80 else print('NO')
+
+
+def banco_imobiliario():  # Falta Fazer
     pass
 
 
-def banco_imobiliario():
-    pass
+def lingua_do_p():  # Presentation Error
+    # No udebug consegui bater o resultado,
+    # mas ainda assim n foi aprovado.
+    txt = input()
+    next_is_p = False
+    for i in range(len(txt)):
+        if not next_is_p:
+            if i == len(txt)-1 and txt[i] != 'p':
+                print(txt[i], end='\n')
+            elif txt[i] != 'p':
+                print(txt[i], end='')
+            elif txt[i+1] == 'p':
+                print(txt[i], end='')
+                next_is_p = True
+        else:
+            next_is_p = False
 
 
-def lingua_do_p():
-    pass
+def letras():  # Ok
+    char : str = input().strip()  # o segredo tá no strip()
+    txt : str = input().strip().split()
+    s : int = 0
+    for word in txt:
+        if char in word:
+            s += 1
+    print(f'{s/len(txt)*100:.1f}')
 
 
-def letras():
-    pass
+def new_password_ra():  # Ok
+    dic : dict = {
+        'GQaku' : 0,
+        'ISblv' : 1,
+        'EOYcmw' : 2,
+        'FPZdnx' : 3,
+        'JTeoy' : 4,
+        'DNXfpz' : 5,
+        'AKUgq' : 6,
+        'CMWhr' : 7,
+        'BLVis' : 8,
+        'HRjt' : 9,
+    }
+    
+    tests : int = int(input())
+    for t in range(tests):
+        c = 0
+        password : str = input().strip()
+        for char in password:
+            if c == 12:
+                break
+            keys = dic.keys()
+            for key in keys:
+                if char in key:
+                    print(dic[key], end='')
+                    c += 1
+                    break
+        print()
 
 
-def new_password_ra():
-    pass
+def avoiding_rain():  # Fazendo (Desenhar)
+    tests : int = int(input())
+    for t in range(tests):
+        home, office = input().strip().split()
 
-
-def avoiding_rain():
-    pass
+        # ...LOGICA AQUI...
+        
 
 
 def lexical():
@@ -198,4 +250,4 @@ def binary_phrase():
     pass
 
 
-the_martian()
+avoiding_rain()

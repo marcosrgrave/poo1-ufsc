@@ -1,2 +1,17 @@
-7
-73 6F 63 6F 72 72 6F
+2
+sol chuva
+chuva sol
+
+3
+chuva sol
+chuva chuva
+chuva chuva
+
+2
+sol chuva
+chuva sol
+
+3
+sol chuva
+sol chuva
+sol chuva
