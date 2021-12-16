@@ -305,25 +305,19 @@ def pulo_do_sapo():  # OK
     for pedra in range(1, num_pedras+1):
         pedras_lista.append(pedra)
     possibs = []
-    for sapo in range(0, num_sapos):
+    for sapo in range(num_sapos):
         pos_inicial, dist_fixa = map(int, input().strip().split())
         possibs.append(pos_inicial)
-        possib_pedra = pos_inicial
+        first_stone: int = inicial_place % jump_width
+        possib_pedra = first_stone
         while True:
-            possib_pedra -= dist_fixa
-            if possib_pedra >= 1:
-                possibs.append(possib_pedra)
-            else:
-                break
-        possib_pedra = pos_inicial
-        while True:
-            possib_pedra += dist_fixa
             if possib_pedra <= num_pedras + 1:
                 possibs.append(possib_pedra)
+                possib_pedra += dist_fixa
             else:
                 break
-    possibs = sorted(possibs)
-    for i in range(0, num_pedras):
+    possibs.sort()
+    for i in range(num_pedras):
         print('1') if pedras_lista[i] in possibs else print('0')
 
 
