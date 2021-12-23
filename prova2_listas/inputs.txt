@@ -1,17 +1,13 @@
-2
-sol chuva
-chuva sol
-
-3
-chuva sol
-chuva chuva
-chuva chuva
-
-2
-sol chuva
-chuva sol
-
-3
-sol chuva
-sol chuva
-sol chuva
+09:56
+09:34
+02:47
+00:30
+02:36
+02:39
+07:35
+07:57
+06:21
+10:04
+10:39
+05:55
+00:00
