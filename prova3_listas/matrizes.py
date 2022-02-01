@@ -41,7 +41,20 @@ def below_the_main_diagonal():
 
 
 def above_secundary_diagonal():
-    pass
+    # Os resultados estão corretos, mas tá dando EOF Error no beecrowd.com
+    operation : str = input()
+    soma : float = 0
+    i : int = 0
+    for line in range(0, 12):
+        for column in range(0, 12):
+            value : float = float(input())
+            if 11 - column <= line:
+                # print(f'{line:2} {column:2} {soma:6}')
+                continue
+            else:
+                i += 1
+                soma += value
+    print(f'{soma:.1f}') if operation in 'sS' else print(f'{soma/i:.1f}')
 
 
 def below_secundary_diagonal():
@@ -96,4 +109,4 @@ def XXXXX():
 
 
 
-below_the_main_diagonal()
+above_secundary_diagonal()
