@@ -28,7 +28,16 @@ def line_in_array():  # Ok
 
 
 def below_the_main_diagonal():
-    pass
+    operation : str = input()
+    soma : float = 0
+    i : int = 0
+    for line in range(0, 12):
+        for column in range(0, 12):
+            value : float = float(input())
+            if line > column:
+                i += 1
+                soma += value
+    print(f'{soma:.1f}') if operation in 'sS' else print(f'{soma/i:.1f}')
 
 
 def above_secundary_diagonal():
@@ -87,4 +96,4 @@ def XXXXX():
 
 
 
-line_in_array()
+below_the_main_diagonal()
