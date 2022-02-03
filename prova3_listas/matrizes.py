@@ -93,12 +93,16 @@ class ListaMatrizes1:
 
 
     def contest():
-        pass
+        results = list()
+        competitors, questions = map(int, input().split())
+        for line in range(competitors):
+            competitor_result = list(map(int, input().split()))
+            results.append(competitor_result)
+        print(results)
 
 
     def binos_challenge():
         pass
-
 
 
 class ListaMatrizes2:
@@ -136,5 +140,4 @@ class ListaMatrizes2:
 
 
 
-
-ListaMatrizes1.square_matrix1()
+ListaMatrizes1.contest()
