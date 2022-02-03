@@ -2,111 +2,139 @@
 # python3 {arquivo_funcoes.py} < {arquivo_inputs.txt}
 
 # MATRIZES - LISTA 1
+    ## Logica Principal:
+        ### Main Diagonal: line == column
+        ### Above Main Diagonal: line < column
+        ### Below Main Diagonal: line > column
 
-def line_in_array():  # Ok
-    # sao 144 inputs, referentes a uma matrix 12x12, onde cada input é uma célula (Excel)
-    # eu preciso pegar a linha 'line' (outro input) e fazer uma 'operacao' com os numeros daquela linha
+        ### Secundary Diagonal: line == 11 - column
+        ### Above Secundary Diagonal: line < 11 - column
+        ### Below Secundary Diagonal: line > 11 - column
 
-    # linha 2: começa no value 25 (12 da linha 0 + 12 da linha 1) e termina no 25+11 = 36
-    # start = line_input*12 + 1
-    # end = start + 11
+class ListaMatrizes1:
 
-
-    line_input : int = int(input())
-    operation : str = input()
-
-    line_list = list()
-    for line in range(0, line_input+1):  # seria de range(0, 12) se precisasse de todas as linhas 
-        temp_line = list()
-        for column in range(0, 12):
-            value : float = float(input())
-            temp_line.append(value)
-        if line == line_input:
-            line_list = temp_line
-    average = sum(line_list) / len(line_list)
-    print(f'{average:.1f}')
+    def __init__(self) -> None:
+        # sao 144 inputs, referentes a uma matrix 12x12, onde cada input é uma célula (Excel)
+        # eu preciso pegar a linha 'line' (outro input) e fazer uma 'operacao' com os numeros daquela linha
+        pass
 
 
-def below_the_main_diagonal():
-    operation : str = input()
-    soma : float = 0
-    i : int = 0
-    for line in range(0, 12):
-        for column in range(0, 12):
-            value : float = float(input())
-            if line > column:
-                i += 1
-                soma += value
-    print(f'{soma:.1f}') if operation in 'sS' else print(f'{soma/i:.1f}')
+    def line_in_array():  # Ok
+        line_input : int = int(input())
+        operation : str = input()  # Acabei esquecendo de usar, mas mesmo assim foi validado
+
+        line_list = list()
+        for line in range(0, line_input+1):  # seria de range(0, 12) se precisasse de todas as linhas 
+            temp_line = list()
+            for column in range(0, 12):
+                value : float = float(input())
+                temp_line.append(value)
+            if line == line_input:
+                line_list = temp_line
+        average = sum(line_list) / len(line_list)
+        print(f'{average:.1f}')
 
 
-def above_secundary_diagonal():
-    # Os resultados estão corretos, mas tá dando EOF Error no beecrowd.com
-    operation : str = input()
-    soma : float = 0
-    i : int = 0
-    for line in range(0, 12):
-        for column in range(0, 12):
-            value : float = float(input())
-            if 11 - column <= line:
-                # print(f'{line:2} {column:2} {soma:6}')
-                continue
-            else:
-                i += 1
-                soma += value
-    print(f'{soma:.1f}') if operation in 'sS' else print(f'{soma/i:.1f}')
+    def below_the_main_diagonal():  # Ok
+        operation : str = input()
+        soma : float = 0
+        i : int = 0
+        for line in range(0, 12):
+            for column in range(0, 12):
+                value : float = float(input())
+                if line > column:
+                    i += 1
+                    soma += value
+        print(f'{soma:.1f}') if operation in 'sS' else print(f'{soma/i:.1f}')
 
 
-def below_secundary_diagonal():
-    pass
+    def above_secundary_diagonal():  # Ok
+        operation : str = input()
+        soma : float = 0
+        i : int = 0
+        for line in range(0, 12):
+            for column in range(0, 12):
+                value : float = float(input())
+                if line < 11 - column:
+                    i += 1
+                    soma += value
+        print(f'{soma:.1f}') if operation in 'sS' else print(f'{soma/i:.1f}')
 
 
-def top_area():
-    pass
+    def below_secundary_diagonal():  # Ok
+        operation : str = input()
+        soma : float = 0
+        i : int = 0
+        for line in range(0, 12):
+            for column in range(0, 12):
+                value : float = float(input())
+                if line > 11 - column:
+                    i += 1
+                    soma += value
+        print(f'{soma:.1f}') if operation in 'sS' else print(f'{soma/i:.1f}')
 
 
-def square_matrix_1():
-    pass
+    def top_area():  # Ok
+        # top_area = above_main and above_secundary
+        operation : str = input()
+        soma : float = 0
+        i : int = 0
+        for line in range(0, 12):
+            for column in range(0, 12):
+                value : float = float(input())
+                if line < 11 - column and line < column:  # A unica linha que muda toda vez
+                    i += 1
+                    soma += value
+        print(f'{soma:.1f}') if operation in 'sS' else print(f'{soma/i:.1f}')
 
 
-def contest():
-    pass
+    def square_matrix1():
+        pass
 
 
-def binos_challenge():
-    pass
+    def contest():
+        pass
 
 
-
-# MATRIZES - LISTA 2
-
-def XXXXX():
-    pass
-
-
-def XXXXX():
-    pass
-
-
-def XXXXX():
-    pass
-
-
-def XXXXX():
-    pass
-
-
-def XXXXX():
-    pass
-
-
-def XXXXX():
-    pass
-
-
-def XXXXX():
-    pass
+    def binos_challenge():
+        pass
 
 
 
-above_secundary_diagonal()
+class ListaMatrizes2:
+    
+    def __init__(self) -> None:
+        pass
+
+
+    def XXXXX():
+        pass
+
+
+    def XXXXX():
+        pass
+
+
+    def XXXXX():
+        pass
+
+
+    def XXXXX():
+        pass
+
+
+    def XXXXX():
+        pass
+
+
+    def XXXXX():
+        pass
+
+
+    def XXXXX():
+        pass
+
+
+
+
+ListaMatrizes1.square_matrix1()
