@@ -92,13 +92,56 @@ class ListaMatrizes1:
         pass
 
 
-    def contest():
-        results = list()
-        competitors, questions = map(int, input().split())
-        for line in range(competitors):
-            competitor_result = list(map(int, input().split()))
-            results.append(competitor_result)
-        print(results)
+    def contest():  # Ok
+        # condicoes
+        # 1. True if sum != competitors
+
+        # lendo os dados
+        while True:
+            # inputs
+            competitors, questions = map(int, input().split())            
+            if competitors == 0:
+                break
+            results = list()
+            for line in range(competitors):
+                competitor_result = list(map(int, input().split()))
+                results.append(competitor_result)
+            #print(results)
+            
+            # tests -> 0 = False; 1 = True
+            test2 = 0
+            test1 = test3 = test4 = 1
+            
+            # soma dos problemas resolvidos (test3)
+            sums = []
+            for zero in range(questions):
+                sums.append(0)
+            
+            for result in results:
+                # validando test1
+                if sum(result) == questions:
+                    test1 = 0
+                # validando test4
+                if sum(result) == 0:
+                    test4 = 0
+                # somando os valores dos resultados (test3)
+                for i, value in enumerate(result):
+                    sums[i] += value
+            
+            # validando test2
+            test2 = 0 if 0 in sums else 1
+            # validando test3
+            #print(sums)
+            if competitors in sums:
+                test3 = 0
+                        
+            # printando os resultados dos testes
+            #print(f"""
+            #test1: {test1}
+            #test2: {test2}
+            #test3: {test3}
+            #test4: {test4}""")
+            print(sum([test1, test2, test3, test4]))
 
 
     def binos_challenge():
