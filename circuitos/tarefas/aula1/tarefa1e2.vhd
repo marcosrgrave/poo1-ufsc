@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity tarefa1 is
+entity tarefa1e2 is
     port (
         KEY : in std_logic_vector(3 downto 0);
         SW : in std_logic_vector(3 downto 0);
@@ -10,8 +10,8 @@ entity tarefa1 is
     );
 end entity;
 
-architecture rtl of tarefa1 is
-    
+architecture rtl of tarefa1e2 is
+    -- no signal defined
 begin
     
     LEDR(3 downto 0) <= SW(3 downto 0);
