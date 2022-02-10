@@ -1,6 +1,3 @@
-from posixpath import split
-
-
 def peca_perdida():  # Ok
     # adicionando todas as peças em uma lista
     N : int = int(input())
