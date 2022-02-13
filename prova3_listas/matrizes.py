@@ -374,9 +374,44 @@ class ListaMatrizes2:
 
 
     def cheese_bread_sweeper():
-        pass
+        qtd_linhas, qtd_colunas = map(int, input().split())
+        
+        matrix = []
+        for r in range(qtd_linhas):
+            linha = list(map(int, input().replace('1', '9').split()))
+            matrix.append(linha)
+        
+        print(matrix)
 
+        # verificar cima, direita, baixo e esquerda. se encontrar 9, soma 1.
+        def check_surrounding(matrix, line, column, find_value):
+            cima     = line-1, column    # linha-1, coluna
+            direita  = line,   column+1  # linha, coluna+1
+            baixo    = line+1, column    # linha+1, coluna
+            esquerda = line,   column-1  # linha-1, coluna
+            
+            tests = cima, direita, baixo, esquerda
+            
+            soma = 0
+            for test in tests:
+                test_line   = test[0]
+                test_column = test[1]
+                if (ij_is_value := matrix[line][column] == find_value):  # i: line, j: column. (i,j) = find_value
+                    print(find_value)
+                    break
+                elif test_line < 0 or test_column < 0:
+                    continue
+                elif matrix[test_line][test_column] == find_value:
+                    soma += 1
+            
+            if not ij_is_value:
+                return soma
+        
+        for i_line, line in enumerate(matrix):
+            for i_column, value in enumerate(line):
+                print(check_surrounding(matrix, i_line, i_column, 9))
+                
 
 
 # ListaMatrizes1.square_matrix1()
-ListaMatrizes2.passa_bolinha()
+ListaMatrizes2.cheese_bread_sweeper()
