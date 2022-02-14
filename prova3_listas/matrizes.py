@@ -120,7 +120,7 @@ class ListaMatrizes1:
         print(f'{soma:.1f}') if operation in 'sS' else print(f'{soma/i:.1f}')
 
 
-    def square_matrix1():  # Presentation Error, mesmo com o resultado batendo no udebug.com
+    def square_matrix_I():  # Presentation Error, mesmo com o resultado batendo no udebug.com
         while True:
             matrix = int(input())  # sempre será uma matriz quadrada
             if matrix == 0:
@@ -254,8 +254,76 @@ class ListaMatrizes2:
         print(f'{soma:.1f}') if operation in 'sS' else print(f'{soma/i:.1f}')
 
 
-    def sudoku():
-        pass
+    def sudoku():  # Ok
+        # import numpy
+        qtd_istancias = int(input())
+
+        # Verificando se a instancia atual é uma solucao
+        instacia_atual = 0
+        while instacia_atual < qtd_istancias:
+        
+            matrix_linhas  = []
+            matrix_colunas = [[], [], [], [], [], [], [], [], []]
+            regioes = [[], [], [], [], [], [], [], [], []]
+            
+            for linha in range(9): # sao 9 linhas
+                valores = input().split()  # manter como texto, mas remover espaços
+
+                # matrix para verificar os numeros nas COLUNAS                
+                for i, v in enumerate(valores):
+                    matrix_colunas[i].extend(v)
+
+                # matrix para verificar os numeros nas LINHAS
+                matrix_linhas.append(valores)
+
+                # matrix para verificar os numeros nas REGIOES
+                i = 0 if linha < 3 else (3 if linha < 6 else 6)
+                regioes[i+0].extend(valores[ :3])  # extend ao inves de append pra n criar listas extras
+                regioes[i+1].extend(valores[3:6])
+                regioes[i+2].extend(valores[6: ])
+
+            # matrix para verificar os numeros nas COLUNAS
+            # matrix_colunas = numpy.transpose(matrix_linhas)
+            
+
+            def n_in_vector(vetor_unico):
+                numeros = '123456789'
+                for n in numeros:
+                    if n not in vetor_unico:
+                        return False
+                return True
+            
+
+            # print('verificando linhas')
+            for linha in matrix_linhas:
+                # print(linha)
+                matrix_is_solution = n_in_vector(linha)
+                if not matrix_is_solution:
+                    # print('quebrou na linha', linha)
+                    break
+            # print()
+            # print('verificando colunas')
+            if matrix_is_solution:
+                for linha in matrix_colunas:
+                    # print(linha)
+                    matrix_is_solution = n_in_vector(linha)
+                    if not matrix_is_solution:
+                        # print('quebrou na coluna', linha)
+                        break
+            # print()
+            # print('verificando regioes')
+            if matrix_is_solution:
+                for matrix in regioes:
+                    # print(matrix)
+                    matrix_is_solution = n_in_vector(matrix)
+                    if not matrix_is_solution:
+                        # print('quebrou na matrix', matrix)
+                        break
+                    
+            instacia_atual += 1
+            print(f'Instancia {instacia_atual}')
+            print('SIM') if matrix_is_solution else print('NAO')
+            print()
 
 
     def handball():  # Ok
@@ -268,8 +336,44 @@ class ListaMatrizes2:
         print(result)
 
 
-    def rulks_punch():
-        pass
+    def rulks_punch():  # Nao terminei
+        qtd_testes = int(input())
+        
+        for teste in range(qtd_testes):  # l = line, c = column
+            # a posicao dos inputs n comeca no zero
+            l_wall, c_wall, l_punch, c_punch = map(int, input().split())
+            l_punch -= 1
+            c_punch -= 1
+            
+            start_wall = []
+            for l in range(l_wall):
+               start_wall_values = list(map(int, input().split()))
+               start_wall.append(start_wall_values)
+            
+            punch_value = 10
+            start_wall[l_punch-1][c_punch-1] += punch_value
+            
+            # i -> que vai de 1 ate onde os limites da parede
+            # onde i = 1 sao os elementos mais proximos do soco, os ao redor
+            for i in range(1, max(l_wall, c_wall)+1):
+                # o ponto de partida (origem) será a localizacao do soco
+                cima     = l_punch-i, c_punch    # linha-1, coluna
+                direita  = l_punch,   c_punch+i  # linha, coluna+1
+                baixo    = l_punch+i, c_punch    # linha+1, coluna
+                esquerda = l_punch,   c_punch-i  # linha-1, coluna
+                
+                direcoes = cima, direita, baixo, esquerda
+                
+                for dir in direcoes:
+                    try:
+                        l_dir, c_dir = dir[0], dir[1]  # line, column
+                        start_wall[l_dir][c_dir] = start_wall[l_dir][c_dir] + punch_value - i
+                    except:
+                        pass
+            
+            for line in start_wall:
+                print(line)
+            print()
 
 
     def robot():  # Ok
@@ -365,15 +469,36 @@ class ListaMatrizes2:
                     pass
             else:
                 return
-
         # se check_new_pos() == None, retorna para a posição anterior        
 
+    def the_last_analogimon():  # Ok
+        while True:
+            try:
+                qtd_linhas, qtd_colunas = map(int, input().split())
 
-    def the_last_analogimon():
-        pass
+                pos_inicial = '1'
+                pos_final   = '2'
+
+                for linha in range(qtd_linhas):
+                    valores_linha = input().split()  # split() pra não contar os espaços em branco
+                
+                    if pos_final in valores_linha:
+                        c_final = valores_linha.index(pos_final)
+                        l_final = linha
+                
+                    if pos_inicial in valores_linha:
+                        c_inicial = valores_linha.index(pos_inicial)
+                        l_inicial = linha
+                
+                min_distancia = abs(l_inicial - l_final) + abs(c_inicial - c_final)
+                
+                print(min_distancia)
+            
+            except EOFError:
+                break
 
 
-    def cheese_bread_sweeper():
+    def cheese_bread_sweeper():  # tá dando 'index out of range', mas n consegui entender pq
         qtd_linhas, qtd_colunas = map(int, input().split())
         
         matrix = []
@@ -407,11 +532,71 @@ class ListaMatrizes2:
             if not ij_is_value:
                 return soma
         
+
         for i_line, line in enumerate(matrix):
             for i_column, value in enumerate(line):
                 print(check_surrounding(matrix, i_line, i_column, 9))
-                
 
+
+class ListaMatrizes3:
+
+    def square_matrix_III():  # Falta corrigir formatação, conforme udebug
+        while True:
+            matrix_size = int(input())
+            
+            if matrix_size == 0:
+                break
+            
+            x = y = 1
+            for line in range(1, matrix_size+1):
+                x = y
+                for column in range(1, matrix_size+1):
+                    print(x, end=' ')
+                    x *= 2
+                y *= 2
+                print()
+            print()
+
+
+    def square_array_IV():
+        # main diagonal : line == column
+        # secundary diagonal : line == len(matrix_size) - column
+        # central element : (matrix_size + 1) / 2
+        # outer (border) : column == 0 or column == len(matrix_size)-1
+        # inner (all the rest) : else
+        
+        matrix_size = int(input())
+
+        for line in range(matrix_size):
+            for column in range(matrix_size):
+                pass
+
+
+    def fans_and_baloons():
+        pass
+
+
+    def campo_de_minhocas():
+        pass
+
+
+    def multiplicacao_matrizes():
+        pass
+
+
+    def sinuca():
+        pass
+
+
+    def quadrado():
+        pass
+
+
+    def tunnel_game():
+        pass
+
+    
 
 # ListaMatrizes1.square_matrix1()
-ListaMatrizes2.cheese_bread_sweeper()
+# ListaMatrizes2.rulks_punch()
+ListaMatrizes3.square_matrix_III()
