@@ -42,6 +42,7 @@
 # diagonal_exercises(logic)
 
 
+
 class ListaMatrizes1:
 
     def __init__(self) -> None:
@@ -232,6 +233,7 @@ class ListaMatrizes1:
         
         for i, n in enumerate(sums):
             print(f'{n} Multiplo(s) de {bases[i]}')
+
 
 
 class ListaMatrizes2:
@@ -538,6 +540,7 @@ class ListaMatrizes2:
                 print(check_surrounding(matrix, i_line, i_column, 9))
 
 
+
 class ListaMatrizes3:
 
     def square_matrix_III():  # Falta corrigir formatação, conforme udebug
@@ -558,34 +561,132 @@ class ListaMatrizes3:
             print()
 
 
-    def square_array_IV():
-        # main diagonal : line == column
-        # secundary diagonal : line == len(matrix_size) - column
-        # central element : (matrix_size + 1) / 2
-        # outer (border) : column == 0 or column == len(matrix_size)-1
-        # inner (all the rest) : else
-        
-        matrix_size = int(input())
+    def square_array_IV():  # Ok
+        while True:
+            try:
+                matrix_size = int(input())
 
-        for line in range(matrix_size):
-            for column in range(matrix_size):
-                pass
+                for line in range(matrix_size):
+                    for column in range(matrix_size):
+                        
+                        main_diagonal : bool = line == column
+                        secundary_diagonal : bool = line == (matrix_size - column - 1)
+                        central_element : bool = line == column == ((matrix_size + 1) / 2 - 1)
+                        
+                        start_inner = int(matrix_size / 3)
+                        end_inner = matrix_size - start_inner - 1
+                        inner : bool = start_inner <= line <= end_inner and start_inner <= column <= end_inner
+                    
+                        if central_element:
+                            print(4, end='')
+                        elif inner:
+                            print(1, end='')
+                        elif main_diagonal:
+                            print(2, end='')
+                        elif secundary_diagonal:
+                            print(3, end='')
+                        else:
+                            print(0, end='')
+                    
+                    print()
+                # print(start_inner, end_inner, inner)
+                print()
+            except EOFError:
+                break
 
 
     def fans_and_baloons():
         pass
 
 
-    def campo_de_minhocas():
-        pass
+    def campo_de_minhocas():  # Ok
+        qtd_lines, qtd_columns = map(int, input().split())
+        
+        matrix = []
+        sum_temp = max_value = 0
+        for l in range(qtd_lines):
+            line = list(map(int, input().split()))
+            sum_temp = sum(line)
+            if sum_temp > max_value:
+                max_value = sum_temp
+            matrix.append(line)
+        
+        sum_temp = 0
+        for column in range(qtd_columns):
+            temp_column = []
+            for line in matrix:
+                v = line[column]
+                temp_column.append(v)
+            sum_temp = sum(temp_column)
+            if sum_temp > max_value:
+                max_value = sum_temp
+        
+        print(max_value)
 
 
-    def multiplicacao_matrizes():
-        pass
+    def multiplicacao_matrizes():  # Nao compreendi a formula para os valores das Matrizes A e B
+        matrix_size = int(input())
+        P, Q, R, S, X, Y = map(int, input().split())
+        # X, Y, P, Q, R, S = map(int, input().split())
+        
+        matrixA = []
+        matrixB = []
+        for c in range(matrix_size):  # lines
+            matrixA.append([])
+            matrixB.append([])
+
+        for line in range(matrix_size):  # i = line; j = column
+            for column in range(matrix_size):
+                i = line   + 1
+                j = column + 1
+                valueA = (P * i + Q * j) * abs(X)  # Aij = (P × i + Q × j) (mod X)
+                matrixA[line].append(valueA)
+
+                valueB = (R * i + S * j) * abs(Y)  # Bij = (R × i + S × j) (mod Y)
+                matrixB[line].append(valueB)
+        
+        print(matrixA)
+        print(matrixB)
+
+        lineC, columnC = map(int, input().split())
+        # matrixA[lineC] * matrixB[columnC]
+        # for v in matrixA[lineC]:
+        #     pass
+        # for line in matrixB:
+        #     v = line[columnC]
+        nC = 0
+        for c in range(matrix_size):
+            nA = matrixA[lineC][c]
+            nB = matrixB[c][columnC]
+            nC += nA * nB
+        print(nC)
+
+        # matrixC = 
 
 
-    def sinuca():
-        pass
+    def sinuca():  # Ok
+        # bola preta = 1; branca = -1
+        # regra1: if bola1 == bola2, preta
+        # regra2: if bola1 != bola2, branca
+
+        int(input())
+        fileira1 : list = input().split()
+        fileira_analisada = fileira1[:]
+        while True:
+            fileira_temp = []
+            if len(fileira_analisada) == 1:
+                break
+            for i, bola2 in enumerate(fileira_analisada):
+                if i == 0:
+                    bola1 = bola2
+                else:
+                    if bola1 == bola2:
+                        fileira_temp.append('1')  # preta (1)
+                    else:
+                        fileira_temp.append('-1')  # branca (-1)
+                    bola1 = bola2
+            fileira_analisada = fileira_temp[:]
+        print('branca') if '-1' in fileira_analisada else print('preta')
 
 
     def quadrado():
@@ -599,4 +700,4 @@ class ListaMatrizes3:
 
 # ListaMatrizes1.square_matrix1()
 # ListaMatrizes2.rulks_punch()
-ListaMatrizes3.square_matrix_III()
+ListaMatrizes3.campo_de_minhocas()
