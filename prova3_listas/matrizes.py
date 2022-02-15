@@ -43,6 +43,9 @@
 
 
 
+from random import randrange
+
+
 class ListaMatrizes1:
 
     def __init__(self) -> None:
@@ -690,7 +693,22 @@ class ListaMatrizes3:
 
 
     def quadrado():
-        pass
+        matrix_size = int(input())
+        matrix = []
+        for l in range(matrix_size):
+            line = list(map(int, input().split()))
+            matrix.append(line)
+        
+        sum_lines = sum_columns = []
+        for column in range(matrix_size):
+            s_col = 0
+            for line in matrix:
+                s_line = sum(line)
+                sum_lines.append(s_line)
+                s_col += line[column]
+            sum_columns.append(s_col)
+        print(sum_lines, sum_columns)
+
 
 
     def tunnel_game():
@@ -700,4 +718,4 @@ class ListaMatrizes3:
 
 # ListaMatrizes1.square_matrix1()
 # ListaMatrizes2.rulks_punch()
-ListaMatrizes3.campo_de_minhocas()
+ListaMatrizes3.quadrado()
