@@ -43,9 +43,6 @@
 
 
 
-from random import randrange
-
-
 class ListaMatrizes1:
 
     def __init__(self) -> None:
@@ -160,7 +157,7 @@ class ListaMatrizes1:
                 linhas.append(linha)
             for linha in linhas:
                 for i, n in enumerate(linha):
-                    print(f'  {n}', end='') if i == 0 else print(f'   {n}', end='')
+                    print(f'{n:3}', end='') if i == 0 else print(f'{n:4}', end='')
                 print()
             print()
 
@@ -692,30 +689,115 @@ class ListaMatrizes3:
         print('branca') if '-1' in fileira_analisada else print('preta')
 
 
-    def quadrado():
+    def quadrado():  # Ok
         matrix_size = int(input())
+        
         matrix = []
+        
         for l in range(matrix_size):
             line = list(map(int, input().split()))
             matrix.append(line)
         
-        sum_lines = sum_columns = []
+        sum_lines = []
+        sum_columns = []
+        sums = []
+        
         for column in range(matrix_size):
             s_col = 0
             for line in matrix:
-                s_line = sum(line)
-                sum_lines.append(s_line)
+                if len(sum_lines) != matrix_size:
+                    s_line = sum(line)
+                    sum_lines.append(s_line)
                 s_col += line[column]
             sum_columns.append(s_col)
-        print(sum_lines, sum_columns)
 
+        # print(sum_lines, sum_columns)
+
+        min_sum_value = min(sum_lines)  # o valor da linha e da coluna serão iguais
+        max_sum_value = max(sum_lines)  # o valor da linha e da coluna serão iguais
+
+        qtd_min = sum_lines.count(min_sum_value)
+        qtd_max = sum_lines.count(max_sum_value)
+        min_qtd = min(qtd_min, qtd_max)
+        max_qtd = max(qtd_min, qtd_max)
+
+        wrong_sum_number = min_sum_value if qtd_min == min_qtd else max_sum_value
+        correct_sum_number = min_sum_value if qtd_min == max_qtd else max_sum_value
+        # print(wrong_sum_number)
+
+        i_line = sum_lines.index(wrong_sum_number)
+        i_col  = sum_columns.index(wrong_sum_number)
+
+        num_laura = matrix[i_line][i_col]
+
+        if correct_sum_number > wrong_sum_number:
+            dif = correct_sum_number - wrong_sum_number
+            original = num_laura + dif
+        else:  # wrong > correct
+            dif = wrong_sum_number - correct_sum_number
+            original = num_laura - dif
+
+        print(original, num_laura)
 
 
     def tunnel_game():
-        pass
+        # inputs das linhas e colunas do mapa e da posição inicial
+        map_lines, map_columns = map(int, input().split())  # recebem a quantidade de linhas e colunas
+        
+        # coletando o mapa inteiro
+        path = []
+        for line in range(map_lines):
+            l_path = input().split()
+            if 'X' in l_path:
+                initial_line = line
+                initial_column = l_path.index('X')
+            path.append(l_path)
+        print(path)
+
+        # criando uma lista pra armazenar as posições que já foram identificadas com '0'
+        pos_anteriores : list = []
+        current_pos = (current_line := initial_line), (current_column := initial_column)
+        pos_anteriores.append(current_pos)
+
+        # funçao pra checar se no ao redor existe um número '1' 
+        def check_new_pos(test_pos):
+            test_line = test_pos[0]
+            test_column = test_pos[1]
+            if test_line >= 0 and test_column >= 0:
+                try:
+                    test_value = path[test_line][test_column]  # global path
+                    if test_value == 0 and test_pos not in pos_anteriores:  # global pos_anteriores
+                        return test_pos  # retornando a posição que foi testada e encontrou o '1'
+                except:
+                    pass
+            else:
+                return
+
+        flag = 0
+        while flag <= map_lines*map_columns:    
+            # definição das posições ao redor da ultima posição verificada com o numero 1
+            cima     = current_line-1, current_column    # linha-1, coluna
+            direita  = current_line,   current_column+1  # linha, coluna+1
+            baixo    = current_line+1, current_column    # linha+1, coluna
+            esquerda = current_line,   current_column-1  # linha-1, coluna
+            
+            # fazendo os testes para encontrar o numero 1 que está ao redor da ultima posição
+            testes = cima, direita, baixo, esquerda
+            direcao = 'F', 'R', 'L'
+        
+            for test in testes:
+                if check_new_pos(test) is not None:
+                    # print(f'{current_line, current_column} -> {test[0], test[1]}')
+                    current_line, current_column = test[0], test[1]
+                    pos_anteriores.append((current_line, current_column))
+            
+            flag += 1
+        
+        # printando a resposta final: ultima localizacao do '1'
+        print(current_line+1, current_column+1)
 
     
 
-# ListaMatrizes1.square_matrix1()
+# ListaMatrizes1.square_matrix_I()()
 # ListaMatrizes2.rulks_punch()
 ListaMatrizes3.quadrado()
