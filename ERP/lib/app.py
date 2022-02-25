@@ -1,31 +1,24 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 
-# FUNCTIONS
+# FUNCTIONS ----------------------------------------------------------------------------------------
 def filtrar_produto(txt):
-    # colocar aqui o codigo pra pesquisar na base de dados
     print(f'O produto "{txt}" foi pesquisado na base de dados.')
 
 def filtrar_fornecedor(txt):
-    # colocar aqui o codigo pra pesquisar na base de dados
     print(f'O fornecedor "{txt}" foi pesquisado na base de dados.')
 
 def editar_produto():
-    # colocar aqui o codigo pra pesquisar na base de dados
     print(f'O produto foi editado.')
 
 def editar_fornecedor():
-    # colocar aqui o codigo pra pesquisar na base de dados
     print(f'O fornecedor foi editado.')
 
 def excluir_produto():
-    # colocar aqui o codigo pra pesquisar na base de dados
     print(f'O produto foi excluido.')
 
 def excluir_fornecedor():
-    # colocar aqui o codigo pra pesquisar na base de dados
     print(f'O fornecedor foi excluido.')
-
 
     ## Popups
         ### showinfo, showwarning, showerror, askquestion or askyesno, askokcancel
@@ -48,12 +41,12 @@ def show_popup(master, title, message, popup_type=int):
     tk.Label(master, text=msg_pop)
 
 
-# WINDOW
+# APP ----------------------------------------------------------------------------------------
 class App(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
 
-        # WINDOW
+        # WINDOW ----------------------------------------------------------------------------------------
         self.title('Gerenciador de Estoque - Marcos e Pablo')
         self.iconbitmap("ERP/resources/carrinho2.ico")
         
@@ -63,14 +56,14 @@ class App(tk.Tk):
         self.width = 800
         self.height = 600
         
-        # self.style = ttk.Style(self)
-        # self.style.theme_use('aqua')
+        self.style = ttk.Style(self)
+        self.style.theme_use()  # sem_nada, 'clam', 'alt', 'default', 'classic'
         
         self.geometry(
             f'{self.width}x{self.height}+{int(user_width/2-self.width/2)}+{int(user_height/2-self.height/2)}'
         )
 
-        # FRAMES
+        # FRAMES ----------------------------------------------------------------------------------------
         self.bg_color = '#8AE3EC'
         # frame_bg = tk.Frame(self, background=self.bg_color)
         # frame_bg.place(relheight=1, relwidth=1)
@@ -79,30 +72,36 @@ class App(tk.Tk):
         window_frame.place(relheight=1, relwidth=1) # pintando a janela inteira (n afeta as tabs)
 
         
-        # STYLE
+        # STYLE ----------------------------------------------------------------------------------------
         self.style = ttk.Style()
         # self.style.configure(style="TNotebook.Tab", font=("Consolas", 10))
         # self.style.configure(style="TButton", font=('Consolas', 16))
 
 
-        # NOTEBOOKS (TABS)
-        self.tabs = ttk.Notebook(self)
-        self.tabs.pack(pady=20, side='top') # pady: desloca, ipady: espessura
+        # TABS / NOTEBOOKS ----------------------------------------------------------------------------------------
+        self.tabs = ttk.Notebook(self, padding=5, width=800, height=600, )
+        pad = 10
+        self.tabs.pack(pady=pad, ipady=pad, padx=pad, ipadx=pad, side='top') # pady: desloca, ipady: espessura
 
+        # tab_dashboard = tk.Frame(self.tabs, background=self.bg_color)  # tk frame allows 'place' and 'pack'
+        # tab_entradas = tk.Frame(self.tabs, background=self.bg_color)
+        # tab_produtos = tk.Frame(self.tabs, background=self.bg_color)  # (n serve no ttk, apenas no tk)
+        # tab_fornecedores = tk.Frame(self.tabs, background=self.bg_color)
         
         tab_dashboard = ttk.Frame(self.tabs)  # tk frame allows 'place' and 'pack'
         tab_entradas = ttk.Frame(self.tabs)
         tab_produtos = ttk.Frame(self.tabs)  # background=self.bg_color (n serve no ttk, apenas no tk)
         tab_fornecedores = ttk.Frame(self.tabs)
 
-        self.tabs.add(tab_dashboard, text='Dashboard')
+        self.tabs.add(tab_dashboard, text='Dashboard', )
         self.tabs.add(tab_entradas, text='Entradas e Saídas')
         self.tabs.add(tab_produtos, text='Produtos')
         self.tabs.add(tab_fornecedores, text='Fornecedores')
 
 
-        # LABELS
+        # LABELS ----------------------------------------------------------------------------------------
         lbl_produto = ttk.Label(tab_produtos, text='NOME PRODUTO')
+        # lbl_produto.place(x=100, y=100, anchor='center')
         lbl_produto.grid(row=2, column=1)
 
         lbl_qtd_produto = ttk.Label(tab_produtos, text='QTD')
@@ -115,17 +114,17 @@ class App(tk.Tk):
         lbl_fornecedor_forn.grid(row=2, column=1, rowspan=2, columnspan=3, sticky='w')
 
 
-        # ENTRIES
+        # ENTRIES ----------------------------------------------------------------------------------------
         filter_produto = ttk.Entry(tab_produtos, justify='center')  # show='*' -> for password
         filter_produto.insert(0, 'Pesquise o produto aqui')
         filter_produto.grid(row=1, column=1, ipadx=20)
 
-        filter_forn = ttk.Entry(tab_fornecedores, justify='center')  # show='*' -> for password
+        filter_forn = ttk.Entry(tab_fornecedores, justify='center')
         filter_forn.insert(0, 'Pesquise o fornecedor aqui')
         filter_forn.grid(row=1, column=1, ipadx=20)
 
 
-        # BUTTONS
+        # BUTTONS ----------------------------------------------------------------------------------------
         btn_filtrar_prod = ttk.Button(tab_produtos, text='Filtrar', command=lambda:filtrar_produto(filter_produto.get()))
         btn_filtrar_prod.grid(row=1, column=2)
 
@@ -144,7 +143,13 @@ class App(tk.Tk):
         btn_exluir_forn = ttk.Button(tab_fornecedores, text='Excluir', command=lambda:excluir_fornecedor())
         btn_exluir_forn.grid(row=3, column=3)
 
-        btn_popup1 = ttk.Button(tab_dashboard, text='show popup', command=lambda:show_popup(self, 'title', 'eat shit', 1))
+        btn_popup1 = ttk.Button(
+            tab_dashboard, 
+            text='show popup', 
+            command=lambda:show_popup(
+                self, 'title', 'eat shit', 1
+                )
+            )
         btn_popup1.grid()
     
 
