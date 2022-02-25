@@ -249,25 +249,44 @@ class Prova3:
         print(repeated)
 
 
-    def samuel_coffee_grower():  # nao cheguei na matematica
-        from math import acos, degrees, sin
-
+    def samuel_coffee_grower():  # COLOCAR COMENTÁRIOS
+        from math import acos, degrees, sin, radians
+        
+        areas = []
         for land in range(2):
             xA, yA = map(int, input().split())
             xB, yB = map(int, input().split())
             xC, yC = map(int, input().split())
             xD, yD = map(int, input().split())
 
+            # triangulo superior
             a = ((xB - xD)**2 + (yB - yD)**2)**(1/2)
-            b = ((xA - xD)**2 + (yA - yD)**2)**(1/2)
-            d = ((xB - xA)**2 + (yA - yB)**2)**(1/2)
-            print(a)
+            b1 = ((xA - xD)**2 + (yA - yD)**2)**(1/2)
+            d1 = ((xB - xA)**2 + (yA - yB)**2)**(1/2)
 
-            cos_a = (b**2 + d**2 - a**2) / (2*b*d)
-            print(cos_a)
-            print(angulo := degrees(acos(cos_a)))
+            # triangulo inferior
+            c = a
+            b2 = ((xC - xD)**2 + (yC - yD)**2)**(1/2)
+            d2 = ((xB - xC)**2 + (yB - yC)**2)**(1/2)
 
-            print(d*b*sin(angulo)/2)
+            # funcao para encontrar o angulo do triangulo
+            def calc_angulo(a, b, c):
+                "retorna o angulo em graus do triangulo"
+                cos_angulo = (b**2 + c**2 - a**2) / (2*b*c)
+                angulo = degrees(acos(cos_angulo))
+                return angulo
+             
+             # calculando o angulo de cada triangulo
+            angulo1 = calc_angulo(a, b1, d1)
+            angulo2 = calc_angulo(c, b2, d2)
+            # print(angulo1, angulo2)
+
+            A1 = 0.5 * b1 * d1 * sin(radians(angulo1))
+            A2 = 0.5 * b2 * d2 * sin(radians(angulo2))
+            A = A1 + A2
+            areas.append(A)
+        
+        print('terreno A') if areas[0] > areas[1] else print('terreno B')
 
 
     def riddles_dark():  # Ok
@@ -285,4 +304,4 @@ class Prova3:
 
 
 
-Prova3.counting_in_chinese()
+Prova3.samuel_coffee_grower()
