@@ -26,8 +26,53 @@ class Prova3:
         print(f'{soma:.1f}') if operation in 'sS' else print(f'{soma/i:.1f}')
 
 
-    def counting_in_chinese():
-        pass
+    def counting_in_chinese():  # Ok
+        # input qtd instancias
+        n_instances : int = int(input())
+        
+        # lendo 1 matriz por instancia
+        for n in range(n_instances):
+            
+            # criando vetores para armazenamento dos nao-nulos
+            lines, columns, values = [], [], []
+
+            # input da quantidade de linhas a serem analisadas
+            N, rows = input().split()
+            
+            # lendo os dados da linha da matriz em questao 
+            for r in range(int(rows)):
+
+                # inputs dos dados da linha
+                P, line, column, value = input().split()
+                value = int(value)
+                
+                # realizando a soma do valor, caso a linha e a coluna já existam
+                if line in lines and column in columns:
+                    i = columns.index(column)
+                    values[i] += value
+                
+                # caso a linha ou a coluna sejam novidade, adicionar todos os dados
+                elif line not in lines or column not in columns:
+                    lines.append(line)
+                    columns.append(column)
+                    values.append(value)
+
+            # vetor de armazenamento da resposta final
+            final_result = []
+            
+            # formatando os valores encontrados
+            for non_null in range(len(lines)):
+                i = non_null
+                final_result.append(f'{lines[i]} {columns[i]} {values[i]}')
+            resp = sorted(final_result)
+            
+            # mostrando as respostas encontradas
+            for r in resp:
+                print(r)
+            
+            # adicionando linha em branco apenas entre instâncias
+            if n != n_instances - 1:
+                print()
 
 
     def quadrado_magico():
@@ -184,15 +229,24 @@ class Prova3:
 
 
     def repeated_stickers():  # Ok
+        # input quantidade de figurinhas
         n_stickers : int = int(input())
+        
+        # vetor para armazenar todas as figurinhas
         total_stickers : list = []
+
+        # lendo o valor de cada figurinha e armazenando no vetor anterior
         for n in range(n_stickers):
             sticker : int = int(input())
             total_stickers.append(sticker)
-        repeated = len(set(total_stickers))
-        uniques  = len(total_stickers) - repeated
-        print(repeated)
+
+        # encontrando as figurinhas unicas e as repetidas
+        uniques = len(set(total_stickers))
+        repeated  = len(total_stickers) - uniques
+
+        # mostrando os valores encontrados
         print(uniques)
+        print(repeated)
 
 
     def samuel_coffee_grower():  # nao cheguei na matematica
@@ -231,4 +285,4 @@ class Prova3:
 
 
 
-Prova3.repeated_stickers()
+Prova3.counting_in_chinese()
