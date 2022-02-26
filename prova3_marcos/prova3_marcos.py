@@ -75,8 +75,37 @@ class Prova3:
                 print()
 
 
-    def quadrado_magico():
-        pass
+    def quadrado_magico():  # nao cheguei em nada
+        # sum_line = sum_column = sum_diag1 = sum_diag2
+        # 0 é o numero que precisa ser substituido
+        
+        sum_main_diag = sum_sec_diag = 0
+        
+        matrix = []
+        sum_lines   = [[ ], [ ], [ ]]
+        sum_columns = []
+        stolen = []
+        
+        for l in range(3):
+            line = list(map(int, input().split()))
+            if 0 in line:
+                stolen.append([l, line.index(0)])
+            sum_lines[l] = sum(line)
+            sum_main_diag += line[l]
+            sum_sec_diag  += line[2-l]
+            matrix.append(line)
+        
+        for i in range(3):
+            sum_col = 0
+            for line in matrix:
+                sum_col += line[i]
+            sum_columns.append(sum_col)
+        
+        print(matrix)
+        print(sum_lines)
+        print(sum_columns)
+        print(sum_main_diag, sum_sec_diag)
+        print(stolen)
 
 
     def frequencia_aula():  # Ok
@@ -220,23 +249,31 @@ class Prova3:
                 break
 
 
-    def battlefield():
-        # linha > coluna : abaixo do rio
-        # linha < coluna : acima  do rio
+    def battlefield():  # Ok
+        # inputs iniciais
         height, width, n_soldiers = map(int, input().split())
+        
+        # razao entre a dimensao de largura com a altura da matrix
+        wh_ratio = width / height
+
+        # iniciando as somas que acumularao as habilidades dos soldados
         above_river = below_river = 0
+
+        # loop de análise para cada soldado
         for soldier in range(n_soldiers):
-            x, y, skill = map(int, input().split())
-            if height > width:  # maior na vertical
-                below : bool = x < y and y >= height-1
-                if below:
-                    below_river += 1
-                else:
-                    above_river += 1
-            if height < width:  # maior na horizontal
-                pass
-            else:  # matriz quadrada
-                pass
+            
+            # inputs do soldado
+            line, column, skill = map(int, input().split())
+            
+            # condicao para o soldado estar abaixo do rio
+            if line > column / wh_ratio:
+                below_river += skill
+            
+            # caso nao esteja abaixo, estará necessariamente acima do rio
+            else:
+                above_river += skill
+        
+        # mostrando os resultados
         print(above_river, below_river)
 
 
@@ -362,4 +399,4 @@ class Prova3:
 
 
 
-Prova3.battlefield()
+Prova3.quadrado_magico()
