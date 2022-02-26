@@ -226,9 +226,13 @@ class Prova3:
         height, width, n_soldiers = map(int, input().split())
         above_river = below_river = 0
         for soldier in range(n_soldiers):
-            line, column, skill = map(int, input().split())
+            x, y, skill = map(int, input().split())
             if height > width:  # maior na vertical
-                pass
+                below : bool = x < y and y >= height-1
+                if below:
+                    below_river += 1
+                else:
+                    above_river += 1
             if height < width:  # maior na horizontal
                 pass
             else:  # matriz quadrada
