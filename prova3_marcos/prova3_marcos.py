@@ -100,7 +100,7 @@ class Prova3:
         print(total_alunos - alunos_repetidos)
 
 
-    def matrix_ladder():  # tudo errado nessa porra
+    def matrix_ladder():  # tá tudo errado nessa porra
         # cond1: only zeros
         qtd_lines, qtd_columns = map(int, input().split())
         cond1 = ok = False
@@ -135,27 +135,60 @@ class Prova3:
         print('S') if ok else print('N')
 
 
-    def corredor():  # works, but time limit...
-        # inputs iniciais
-        num_salas = int(input())
-        vetor = tuple(map(int, input().split()))
-
-        # realiza a soma de todas as salas
-        # e vai removendo uma por vez, da esquerda para a direita
-        # registrando apenas a maior soma encontrada
-        maior_soma = 0
-        fim_loop = len(vetor)
-        for i1 in range(fim_loop):
-            soma = vetor[i1]
-            for i2 in range(i1+1, fim_loop):
-                if i2 - i1 > 0:
-                    soma += vetor[i2]
-                    if soma > maior_soma:
-                        maior_soma = soma
+    def corredor():  # Ok (Kadane's Algorithm)
         
-        # mostrando a maior soma encontrada
-        print(maior_soma)
-                
+        # ---------------------------------------------------------
+
+        # # CODIGO INICIAL (TIME LIMIT EXCEEDED)
+        
+        # # inputs iniciais
+        # num_salas = input()
+        # vetor = input().split()
+
+        # # realiza a soma de todas as salas
+        # # e vai removendo uma por vez, da esquerda para a direita
+        # # registrando apenas a maior soma encontrada
+        # maior_soma = 0
+        # fim_loop = len(vetor)
+        # for i1 in range(fim_loop):
+        #     if int(vetor[i1]) > 0:
+        #         soma = int(vetor[i1])
+        #         for i2 in range(i1+1, fim_loop):
+        #             soma += int(vetor[i2])
+        #             if int(vetor[i2]) > 0 and soma > maior_soma:
+        #                 maior_soma = soma
+        
+        # # mostrando a maior soma encontrada
+        # print(maior_soma)
+
+        # ---------------------------------------------------------
+        
+        # ALGORITMO PESQUISADO: Kadane's Algorithm
+        # Nesse exercício tive que apelar para a Internet
+        # Meu código inicial parecia resolver o problema, mas retornava Time Limit Exceeded
+        # Encontrei o Kadane's Algorithm
+        # https://en.wikipedia.org/wiki/Maximum_subarray_problem
+        
+        # inputs iniciais
+        num_salas = input()
+        vetor = list(map(int, input().split()))
+        
+        # Kadane's Algorithm
+        # Achei a ideia do algoritmo semelhante ao do código inicial
+        # Porém, ele nao necessita realizar dois loops, apenas um
+        best_sum = 0
+        current_sum = 0
+        # aqui ele faz um loop para cada valor no vetor
+        for x in vetor:
+            # é feita a soma enquanto o current_sum é maior que zero
+            # caso contrário, a soma é resetada
+            current_sum = max(0, current_sum + x)
+            # amazenando apenas a maior soma encontrada
+            best_sum    = max(best_sum, current_sum)
+
+        # mostrando o resultado
+        print(best_sum)
+                        
 
     def applying_tests():
         pass
@@ -188,7 +221,19 @@ class Prova3:
 
 
     def battlefield():
-        pass
+        # linha > coluna : abaixo do rio
+        # linha < coluna : acima  do rio
+        height, width, n_soldiers = map(int, input().split())
+        above_river = below_river = 0
+        for soldier in range(n_soldiers):
+            line, column, skill = map(int, input().split())
+            if height > width:  # maior na vertical
+                pass
+            if height < width:  # maior na horizontal
+                pass
+            else:  # matriz quadrada
+                pass
+        print(above_river, below_river)
 
 
     def noise_effect():  # nao entendi a conta pra chegar no valor final
@@ -313,4 +358,4 @@ class Prova3:
 
 
 
-Prova3.samuel_coffee_grower()
+Prova3.battlefield()
