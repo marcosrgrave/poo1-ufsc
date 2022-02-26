@@ -249,43 +249,52 @@ class Prova3:
         print(repeated)
 
 
-    def samuel_coffee_grower():  # COLOCAR COMENTÁRIOS
+    def samuel_coffee_grower():  # Ok
+        # importanto lib para operacoes matematicas
         from math import acos, degrees, sin, radians
         
+        # vetor que armzenará a area do primeiro e do segundo terreno
         areas = []
+
+        # loop para calculo da area de cada terreno
         for land in range(2):
+
+            # definicao dos vertices do terreo
             xA, yA = map(int, input().split())
             xB, yB = map(int, input().split())
             xC, yC = map(int, input().split())
             xD, yD = map(int, input().split())
 
             # triangulo superior
-            a = ((xB - xD)**2 + (yB - yD)**2)**(1/2)
-            b1 = ((xA - xD)**2 + (yA - yD)**2)**(1/2)
-            d1 = ((xB - xA)**2 + (yA - yB)**2)**(1/2)
+            a  = ((xB - xD)**2 + (yB - yD)**2)**(1/2)  # segmento do vertice B ao D
+            b1 = ((xA - xD)**2 + (yA - yD)**2)**(1/2)  # segmento do vertice A ao D
+            d1 = ((xB - xA)**2 + (yA - yB)**2)**(1/2)  # segmento do vertice A ao B
 
             # triangulo inferior
             c = a
-            b2 = ((xC - xD)**2 + (yC - yD)**2)**(1/2)
-            d2 = ((xB - xC)**2 + (yB - yC)**2)**(1/2)
+            b2 = ((xC - xD)**2 + (yC - yD)**2)**(1/2)  # segmento do vertice C ao D
+            d2 = ((xB - xC)**2 + (yB - yC)**2)**(1/2)  # segmento do vertice B ao C
 
-            # funcao para encontrar o angulo do triangulo
+            # funcao para encontrar o angulo do triangulo (Lei dos Cossenos)
             def calc_angulo(a, b, c):
                 "retorna o angulo em graus do triangulo"
                 cos_angulo = (b**2 + c**2 - a**2) / (2*b*c)
                 angulo = degrees(acos(cos_angulo))
                 return angulo
              
-             # calculando o angulo de cada triangulo
+            # calculando o angulo do triangulo superior e inferior
             angulo1 = calc_angulo(a, b1, d1)
             angulo2 = calc_angulo(c, b2, d2)
-            # print(angulo1, angulo2)
 
+            # calculo das areas de cada triangulo
             A1 = 0.5 * b1 * d1 * sin(radians(angulo1))
             A2 = 0.5 * b2 * d2 * sin(radians(angulo2))
+            
+            # calculando a area do terreno e adicionando ao vetor
             A = A1 + A2
             areas.append(A)
         
+        # mostrando o resultado encontrado
         print('terreno A') if areas[0] > areas[1] else print('terreno B')
 
 
