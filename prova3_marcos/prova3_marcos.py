@@ -75,8 +75,37 @@ class Prova3:
                 print()
 
 
-    def quadrado_magico():
-        pass
+    def quadrado_magico():  # nao cheguei em nada
+        # sum_line = sum_column = sum_diag1 = sum_diag2
+        # 0 é o numero que precisa ser substituido
+        
+        sum_main_diag = sum_sec_diag = 0
+        
+        matrix = []
+        sum_lines   = [[ ], [ ], [ ]]
+        sum_columns = []
+        stolen = []
+        
+        for l in range(3):
+            line = list(map(int, input().split()))
+            if 0 in line:
+                stolen.append([l, line.index(0)])
+            sum_lines[l] = sum(line)
+            sum_main_diag += line[l]
+            sum_sec_diag  += line[2-l]
+            matrix.append(line)
+        
+        for i in range(3):
+            sum_col = 0
+            for line in matrix:
+                sum_col += line[i]
+            sum_columns.append(sum_col)
+        
+        print(matrix)
+        print(sum_lines)
+        print(sum_columns)
+        print(sum_main_diag, sum_sec_diag)
+        print(stolen)
 
 
     def frequencia_aula():  # Ok
@@ -100,7 +129,7 @@ class Prova3:
         print(total_alunos - alunos_repetidos)
 
 
-    def matrix_ladder():  # tudo errado nessa porra
+    def matrix_ladder():  # tá tudo errado nessa porra
         # cond1: only zeros
         qtd_lines, qtd_columns = map(int, input().split())
         cond1 = ok = False
@@ -135,27 +164,60 @@ class Prova3:
         print('S') if ok else print('N')
 
 
-    def corredor():  # works, but time limit...
-        # inputs iniciais
-        num_salas = int(input())
-        vetor = tuple(map(int, input().split()))
-
-        # realiza a soma de todas as salas
-        # e vai removendo uma por vez, da esquerda para a direita
-        # registrando apenas a maior soma encontrada
-        maior_soma = 0
-        fim_loop = len(vetor)
-        for i1 in range(fim_loop):
-            soma = vetor[i1]
-            for i2 in range(i1+1, fim_loop):
-                if i2 - i1 > 0:
-                    soma += vetor[i2]
-                    if soma > maior_soma:
-                        maior_soma = soma
+    def corredor():  # Ok (Kadane's Algorithm)
         
-        # mostrando a maior soma encontrada
-        print(maior_soma)
-                
+        # ---------------------------------------------------------
+
+        # # CODIGO INICIAL (TIME LIMIT EXCEEDED)
+        
+        # # inputs iniciais
+        # num_salas = input()
+        # vetor = input().split()
+
+        # # realiza a soma de todas as salas
+        # # e vai removendo uma por vez, da esquerda para a direita
+        # # registrando apenas a maior soma encontrada
+        # maior_soma = 0
+        # fim_loop = len(vetor)
+        # for i1 in range(fim_loop):
+        #     if int(vetor[i1]) > 0:
+        #         soma = int(vetor[i1])
+        #         for i2 in range(i1+1, fim_loop):
+        #             soma += int(vetor[i2])
+        #             if int(vetor[i2]) > 0 and soma > maior_soma:
+        #                 maior_soma = soma
+        
+        # # mostrando a maior soma encontrada
+        # print(maior_soma)
+
+        # ---------------------------------------------------------
+        
+        # ALGORITMO PESQUISADO: Kadane's Algorithm
+        # Nesse exercício tive que apelar para a Internet
+        # Meu código inicial parecia resolver o problema, mas retornava Time Limit Exceeded
+        # Encontrei o Kadane's Algorithm
+        # https://en.wikipedia.org/wiki/Maximum_subarray_problem
+        
+        # inputs iniciais
+        num_salas = input()
+        vetor = list(map(int, input().split()))
+        
+        # Kadane's Algorithm
+        # Achei a ideia do algoritmo semelhante ao do código inicial
+        # Porém, ele nao necessita realizar dois loops, apenas um
+        best_sum = 0
+        current_sum = 0
+        # aqui ele faz um loop para cada valor no vetor
+        for x in vetor:
+            # é feita a soma enquanto o current_sum é maior que zero
+            # caso contrário, a soma é resetada
+            current_sum = max(0, current_sum + x)
+            # amazenando apenas a maior soma encontrada
+            best_sum    = max(best_sum, current_sum)
+
+        # mostrando o resultado
+        print(best_sum)
+                        
 
     def applying_tests():
         pass
@@ -187,8 +249,32 @@ class Prova3:
                 break
 
 
-    def battlefield():
-        pass
+    def battlefield():  # Ok
+        # inputs iniciais
+        height, width, n_soldiers = map(int, input().split())
+        
+        # razao entre a dimensao de largura com a altura da matrix
+        wh_ratio = width / height
+
+        # iniciando as somas que acumularao as habilidades dos soldados
+        above_river = below_river = 0
+
+        # loop de análise para cada soldado
+        for soldier in range(n_soldiers):
+            
+            # inputs do soldado
+            line, column, skill = map(int, input().split())
+            
+            # condicao para o soldado estar abaixo do rio
+            if line > column / wh_ratio:
+                below_river += skill
+            
+            # caso nao esteja abaixo, estará necessariamente acima do rio
+            else:
+                above_river += skill
+        
+        # mostrando os resultados
+        print(above_river, below_river)
 
 
     def noise_effect():  # nao entendi a conta pra chegar no valor final
@@ -249,43 +335,52 @@ class Prova3:
         print(repeated)
 
 
-    def samuel_coffee_grower():  # COLOCAR COMENTÁRIOS
+    def samuel_coffee_grower():  # Ok
+        # importanto lib para operacoes matematicas
         from math import acos, degrees, sin, radians
         
+        # vetor que armzenará a area do primeiro e do segundo terreno
         areas = []
+
+        # loop para calculo da area de cada terreno
         for land in range(2):
+
+            # definicao dos vertices do terreo
             xA, yA = map(int, input().split())
             xB, yB = map(int, input().split())
             xC, yC = map(int, input().split())
             xD, yD = map(int, input().split())
 
             # triangulo superior
-            a = ((xB - xD)**2 + (yB - yD)**2)**(1/2)
-            b1 = ((xA - xD)**2 + (yA - yD)**2)**(1/2)
-            d1 = ((xB - xA)**2 + (yA - yB)**2)**(1/2)
+            a  = ((xB - xD)**2 + (yB - yD)**2)**(1/2)  # segmento do vertice B ao D
+            b1 = ((xA - xD)**2 + (yA - yD)**2)**(1/2)  # segmento do vertice A ao D
+            d1 = ((xB - xA)**2 + (yA - yB)**2)**(1/2)  # segmento do vertice A ao B
 
             # triangulo inferior
             c = a
-            b2 = ((xC - xD)**2 + (yC - yD)**2)**(1/2)
-            d2 = ((xB - xC)**2 + (yB - yC)**2)**(1/2)
+            b2 = ((xC - xD)**2 + (yC - yD)**2)**(1/2)  # segmento do vertice C ao D
+            d2 = ((xB - xC)**2 + (yB - yC)**2)**(1/2)  # segmento do vertice B ao C
 
-            # funcao para encontrar o angulo do triangulo
+            # funcao para encontrar o angulo do triangulo (Lei dos Cossenos)
             def calc_angulo(a, b, c):
                 "retorna o angulo em graus do triangulo"
                 cos_angulo = (b**2 + c**2 - a**2) / (2*b*c)
                 angulo = degrees(acos(cos_angulo))
                 return angulo
              
-             # calculando o angulo de cada triangulo
+            # calculando o angulo do triangulo superior e inferior
             angulo1 = calc_angulo(a, b1, d1)
             angulo2 = calc_angulo(c, b2, d2)
-            # print(angulo1, angulo2)
 
+            # calculo das areas de cada triangulo
             A1 = 0.5 * b1 * d1 * sin(radians(angulo1))
             A2 = 0.5 * b2 * d2 * sin(radians(angulo2))
+            
+            # calculando a area do terreno e adicionando ao vetor
             A = A1 + A2
             areas.append(A)
         
+        # mostrando o resultado encontrado
         print('terreno A') if areas[0] > areas[1] else print('terreno B')
 
 
@@ -304,4 +399,4 @@ class Prova3:
 
 
 
-Prova3.samuel_coffee_grower()
+Prova3.quadrado_magico()
