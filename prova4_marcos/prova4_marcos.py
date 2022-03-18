@@ -13,7 +13,8 @@ class RespostasProva4:
             # contador da presença das cartas base nas cartas que sobraram
             s = 0
 
-            # verificando cada carta base nas que sobraram e adicionando ao contador
+            # verificando cada carta base nas que sobraram
+            # e adicionando ao contador
             for carta in cartas_base:
                 if carta in cartas_sobraram:
                     s += 1
@@ -146,8 +147,43 @@ class RespostasProva4:
                 print(numeros, end="")
             print()
 
-    def duas_notas():
-        pass
+    def duas_notas():  # Ok
+        # definicao inicial
+        notas_disponíveis = 2, 5, 10, 20, 50, 100
+
+        # loop até EOF
+        while True:
+
+            # input dos valores
+            valor_compra, valor_pago = map(int, input().split())
+
+            # condicao para encerrar loop
+            if valor_compra == 0 and valor_pago == 0:
+                break
+
+            # calculando troco a ser dado
+            troco_inicial: int = valor_pago - valor_compra
+
+            # definicoes para a condicao do exercicio
+            troco_exato: bool = False
+            troco: int = troco_inicial
+            troco_temp: int = 0
+            notas_utilizadas: int = 0
+
+            # loop com cada nota disponivel para troco
+            # se possivel troco, contabiliza as notas utilizadas
+            for nota in sorted(notas_disponíveis, reverse=True):
+                if (qtd_nota := troco // nota) > 0:
+                    troco -= qtd_nota * nota
+                    troco_temp += qtd_nota * nota
+                    notas_utilizadas += 1
+
+            # condicoes de existencias do troco em apenas duas notas
+            cond1 = troco_inicial == troco_temp
+            cond2 = notas_utilizadas == 2
+
+            # mostrando resultado obtido
+            print("possible") if cond1 and cond2 else print("impossible")
 
 
 RespostasProva4.duas_notas()
