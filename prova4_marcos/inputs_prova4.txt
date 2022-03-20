@@ -1,7 +1,7 @@
-11 23
-500 650
-100 600
-9948 9963
-1 2
-2 4
-0 0
+3
+see a bear sell stock see a bull buy stock bid stock bid stock hear the bell
+bear
+see a bear sell stock see a bull buy stock bid stock bid stock hear the bell
+bid
+see a bear sell stock see a bull buy stock bid stock bid stock hear the bell
+hear

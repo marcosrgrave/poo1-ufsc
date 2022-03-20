@@ -185,7 +185,58 @@ class RespostasProva4:
             # mostrando resultado obtido
             print("possible") if cond1 and cond2 else print("impossible")
 
+    def eachianosII():  # nao encerrada
+        amount_tests: int = int(input())
+        for test in range(amount_tests):
+            txt: str = input()
+            key: str = input()
 
-RespostasProva4.duas_notas()
+            key_pos = start = 0
+            while True:
+                key_pos = txt.find(key, start)
+                if key_pos == -1:
+                    if start == 0:
+                        print(key_pos)
+                    break
+                else:
+                    start_word_index = key_pos
+                    end_word_index = txt.find(" ", start_word_index)
+                    word = txt[start_word_index:end_word_index]
+
+                    if word != key:
+                        start = end_word_index-1
+                        continue
+                    start = txt.find(" ", key_pos)
+                    print(key_pos, end=" ")
+            print()
+
+    def o_retorno_do_rei():  # Ok, mas enviado após o horário da prova
+        # input inicial
+        qtd_runas, amizade_necessaria = map(int, input().split())
+
+        # armazenando os nomes e valores das runas em um dicionario
+        runas: dict = dict()
+        for runa in range(qtd_runas):
+            id_runa, amizade_runa = input().split()
+            runas[id_runa] = int(amizade_runa)
+
+        # inputs finais
+        input()
+        runas_utilizadas = input().split()
+
+        # calculando os valores das runas utilizadas
+        amizade_utilizada = 0
+        for runa in runas_utilizadas:
+            amizade_utilizada += runas[runa]
+
+        # mostrando os resultados obtidos
+        print(amizade_utilizada)
+        if amizade_utilizada >= amizade_necessaria:
+            print("You shall pass!")
+        else:
+            print("My precioooous")
+
+
+RespostasProva4.eachianosII()
 # cd prova4_marcos
 # python prova4_marcos.py < inputs_prova4.txt
